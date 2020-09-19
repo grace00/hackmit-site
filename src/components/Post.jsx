@@ -1,22 +1,7 @@
 import React from 'react';
 import Form from "@rjsf/semantic-ui";
 import { Header, Grid, Container } from 'semantic-ui-react';
-import axios from 'axios';
 
-// const options = [
-//   { key: 'ba', text: 'Babysitter', value: 'babysitter' },
-//   { key: 'cl', text: 'Cleaner', value: 'cleaner' },
-//   { key: 'ca', text: 'Carpenter', value: 'carpenter' },
-//   { key: 'do', text: 'Dog walker', value: 'dog walker' },
-//   { key: 'ex', text: 'Exterminator', value: 'exterminator' },
-//   { key: 'la', text: 'Lawn care', value: 'lawn care' },
-//   { key: 'ph', text: 'Photography', value: 'photography' },
-//   { key: 'pi', text: 'Piano lessons', value: 'piano lessons' },
-//   { key: 'si', text: 'Singing lessons', value: 'singing lessons' },
-//   { key: 'si', text: 'Singing lessons', value: 'singing lessons' },
-//   { key: 'vi', text: 'Video production', value: 'video production' },
-//   { key: 'ya', text: 'Yard work', value: 'yard work' },
-// ]
 const options = [
   'Arts & Crafts',
   'Babysitter',
@@ -47,11 +32,13 @@ export default class Post extends React.Component {
   }
 
   handleSubmit = (event) => {
+    let data = event.formData;
     fetch('http://localhost:5000/express_backend', {
     "method": "POST",
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
+    "body": JSON.stringify(data)
   }).then((response) => {
     if (response.status !== 200) {
       this.setState({ error: true });
@@ -61,35 +48,7 @@ export default class Post extends React.Component {
       console.log("successful call to backend", response.status)
     }
   })
-
-    /*
-    axios.post('/express_backend', {
-      name: "Grace"
-    }).then((response) => {
-      if (response.status === 200) {
-        console.log("successful call to backend")
-      }
-    }).catch((error) => {
-      console.log("error in backend response", error)
-    })*/
-  }
-
-  componentDidMount() {
-    // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
-  }
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('http://localhost:5000/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message)
-    }
-    return body;
-  };
+}
 
   render() {
     if (this.state.complete) {
