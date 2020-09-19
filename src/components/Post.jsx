@@ -33,7 +33,7 @@ export default class Post extends React.Component {
 
   handleSubmit = (event) => {
     let data = event.formData;
-    fetch('http://localhost:5000/express_backend', {
+    fetch('http://localhost:5000/formSubmission', {
     "method": "POST",
     headers: {
       'Content-Type': 'application/json',
@@ -108,7 +108,11 @@ export default class Post extends React.Component {
         },
         "cost": {
           "type": "string",
-          "title": "Cost of service (if applicable)",
+          "title": "Service description and cost (Ex: Piano lessons, $50/hour)",
+        },
+        "acost": {
+          "type": "string",
+          "title": "Price range of products",
         },
         "email": {
           "type": "string",
