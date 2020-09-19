@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Image , Grid, Item, Header, Container} from 'semantic-ui-react';
+import { List, Image , Grid, Item, Header, Container, Icon, Segment} from 'semantic-ui-react';
 import Form from "@rjsf/semantic-ui";
 import Fade from 'react-reveal/Fade';
 import Project from './project';
@@ -40,13 +40,13 @@ export default class BusinessInfo extends React.Component {
       reviews: [{"UserID": 382048, 
                  "UserName": "Jane Moo",
                  "Description": "It was amazing! I could feel myself getting stronger wow!", 
-                 "Time": Date("i'm too tired for this rn"),
+                 "Time": new Date(),
                  "Rating": 5, 
                  "Photo": null},
                  {"UserID": 212342, 
                  "UserName": "John Moo",
                  "Description": "It tastes like over priced milk...", 
-                 "Time": Date("lol"),
+                 "Time": new Date(),
                  "Rating": 1, 
                  "Photos": []}],
     }
@@ -117,9 +117,9 @@ export default class BusinessInfo extends React.Component {
           <a href={product.url}>
           <img src={product.Photo} alt={product.Name} style={{width:250, height:300}}></img>
           </a>
-          <h2>{product.Name}</h2>
-          <span>{product.Description}</span>
-          <span>{product.Price}</span>
+          <h3>{product.Name}</h3>
+          <p>{product.Description}</p>
+          <p>{product.Price}</p>
       </div>
     </Fade>
   </Grid.Column>
@@ -146,33 +146,44 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderReview(review){
-    return <List.Item>
-              <div style={{alignSelf: "center"}}>
-                <img avatar src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/>
-              </div>
-              <List.Content>
-                <List.Header as='a'>{review.UserName}</List.Header>
-                <List.Description>
-                  {review.Description}
-                </List.Description>
-                <List.Description>
-                  {/* <Ratings rating={product.Ratings}/> */}
-                  {review.Time}
-                </List.Description>
-                
-              </List.Content>
-            </List.Item>
+    console.log(review.Time.toDateString());
+    return <Segment>
+      <Fade bottom>
+        <div style={{alignSelf: "center"}}>
+          <i class="big user outline icon"></i>
+          {/* <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/> */}
+        </div>
+        <List.Content>
+          <List.Header as='a'>{review.UserName}</List.Header>
+          <List.Description>
+            {review.Description}
+          </List.Description>
+          <List.Description>
+            {/* <Ratings rating={product.Ratings}/> */}
+            {review.Time.toDateString()}
+          </List.Description>
+        </List.Content>
+      </Fade>
+    </Segment>
+    
   }
 
   renderReviews(){
-    const reviews = this.state.reviews.map ((review) =>
-      this.renderReview(review)
-    )
+    // const reviews = this.state.reviews.map ((review) =>
+    //   this.renderReview(review)
+    // )
     
     return <div>
-      <h4>Reviews</h4>
-      <List>{reviews}</List>
+      <h1><Fade bottom cascade>Reviews</Fade></h1>
+      {this.state.reviews.map((review)=>(
+            this.renderReview(review)
+        ))}
     </div>
+
+    // return <div>
+    //   <h1>Reviews</h1>
+    //   <List>{reviews}</List>
+    // </div>
   }
 
   handleSubmit = (event) => {
@@ -254,8 +265,11 @@ export default class BusinessInfo extends React.Component {
     return (
       <div>
         {this.renderMainInfo()}
+        <br/>
         {this.renderProducts()}
+        <br/>
         {this.renderReviews()}
+        <br/>
         {this.renderReviewForm()}
       </div>
     )
