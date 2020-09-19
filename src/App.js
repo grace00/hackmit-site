@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import { Switch, HashRouter, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import MainPage from './components/MainPage';
+import Listings from './components/Listings';
+import Post from './components/Post';
+import BusinessInfo from './components/BusinessInfo';
 
 class App extends React.Component {
   render() {
@@ -11,15 +15,11 @@ class App extends React.Component {
         <HashRouter>
           <NavBar />
           <Switch>
-            {/*<Route exact path='/' component={MainPage} />*/}
+            <Route exact path='/' component={MainPage} />
+            <Route exact path='/businesses' component={Listings} />
+            <Route exact path='/post' component={Post} />
+            <Route exact path='/businesses/1' component={BusinessInfo} /> {/* need to make dynammic later */}
           </Switch>
-
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <button class="ui button" role="button">Btn with Semantic-UI</button>
-        
         </HashRouter>
       </div>
     );

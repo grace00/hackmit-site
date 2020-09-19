@@ -8,10 +8,10 @@ export default function NavBar() {
         <Link to="/">
           <Menu.Item name='home' />
         </Link>
-        <Link to="/">
+        <Link to="/businesses">
           <Menu.Item name='businesses' />
         </Link>
-        <Link to="/">
+        <Link to="/post">
           <Menu.Item name='Post Your Business' />
         </Link>
       </Menu>
