@@ -8,6 +8,7 @@ import MainPage from './components/MainPage';
 import Listings from './components/Listings';
 import Post from './components/Post';
 import BusinessInfo from './components/BusinessInfo';
+import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends React.Component {
   render() {
