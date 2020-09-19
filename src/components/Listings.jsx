@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {Card} from 'semantic-ui-react'
+import {Card, Image, Icon} from 'semantic-ui-react'
 import SearchBar from '../components/SearchBar/SearchBar';
 import axios from 'axios';
 
@@ -43,52 +43,38 @@ export default class Listings extends React.Component {
     switch(type) {
       case('Arts & Crafts'):
         return "red"
-        break;
       case('Babysitter'):
         return "blue"
-        break;
       case('Beauty'):
         return "pink"
-        break;
       case('Cleaner'):
         return "green"
-        break;
       case('Carpenter'):
         return "brown"
-        break;
       case('Dog walker'):
         return "olive"
-        break;
       case('Exterminator'):
         return "violet"
-        break;
       case('Grocery'):
         return "teal"
-        break;
       case('Lawn care'):
         return "orange"
-        break;
       case('Photography'):
         return "black"
-        break;
       case('Piano lessons'):
         return "yellow"
-        break;
       case('Singing lessons'):
         return "yellow"
-        break;
       case('Sports & Outdoor'):
         return "teal"
-        break;
       case('Technology'):
-        return "orange"
-        break;
+        return "blue"
       case('Video production'):
         return "black"
-        break;
       case('Yard work'):
         return "yellow"
-        break;
+      default:
+        return "black"
     }
   }
 
@@ -96,18 +82,26 @@ export default class Listings extends React.Component {
     return (
       <div>
           <SearchBar />
-          <h1>listings</h1>
+          <h1>Listings</h1>
           <Card.Group>
           {
             this.state.Data.map((item, index) => (
               <Card
                 as={ Link } to={"/businesses/" + item.doc._id}
-                header={item.doc.businessName}
-                meta={item.doc.type}
-                description={item.doc.description}
                 color={this.colorSwitch(item.doc.type)}
-                group
-              />
+                group="true">
+                <Card.Content
+                  header={item.doc.businessName}
+                  meta={item.doc.type}
+                  description={item.doc.description}>
+                </Card.Content>
+                <Card.Content extra>
+                    <a>
+                      <Icon name='star' />
+                      22 Reviews
+                    </a>
+                </Card.Content>
+              </Card>
           ))
           }
           </Card.Group>
