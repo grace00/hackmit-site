@@ -39,6 +39,59 @@ export default class Listings extends React.Component {
     })
   }
 
+  colorSwitch = (type) => {
+    switch(type) {
+      case('Arts & Crafts'):
+        return "red"
+        break;
+      case('Babysitter'):
+        return "blue"
+        break;
+      case('Beauty'):
+        return "pink"
+        break;
+      case('Cleaner'):
+        return "green"
+        break;
+      case('Carpenter'):
+        return "brown"
+        break;
+      case('Dog walker'):
+        return "olive"
+        break;
+      case('Exterminator'):
+        return "violet"
+        break;
+      case('Grocery'):
+        return "teal"
+        break;
+      case('Lawn care'):
+        return "orange"
+        break;
+      case('Photography'):
+        return "black"
+        break;
+      case('Piano lessons'):
+        return "yellow"
+        break;
+      case('Singing lessons'):
+        return "yellow"
+        break;
+      case('Sports & Outdoor'):
+        return "teal"
+        break;
+      case('Technology'):
+        return "orange"
+        break;
+      case('Video production'):
+        return "black"
+        break;
+      case('Yard work'):
+        return "yellow"
+        break;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -52,7 +105,7 @@ export default class Listings extends React.Component {
                 header={item.doc.businessName}
                 meta={item.doc.type}
                 description={item.doc.description}
-                image={item.doc.image}
+                color={this.colorSwitch(item.doc.type)}
                 group
               />
           ))
