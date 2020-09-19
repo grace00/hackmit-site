@@ -1,21 +1,7 @@
 import React from 'react';
 import Form from "@rjsf/semantic-ui";
-import { Header, Grid, Container } from 'semantic-ui-react'
+import { Header, Grid, Container } from 'semantic-ui-react';
 
-// const options = [
-//   { key: 'ba', text: 'Babysitter', value: 'babysitter' },
-//   { key: 'cl', text: 'Cleaner', value: 'cleaner' },
-//   { key: 'ca', text: 'Carpenter', value: 'carpenter' },
-//   { key: 'do', text: 'Dog walker', value: 'dog walker' },
-//   { key: 'ex', text: 'Exterminator', value: 'exterminator' },
-//   { key: 'la', text: 'Lawn care', value: 'lawn care' },
-//   { key: 'ph', text: 'Photography', value: 'photography' },
-//   { key: 'pi', text: 'Piano lessons', value: 'piano lessons' },
-//   { key: 'si', text: 'Singing lessons', value: 'singing lessons' },
-//   { key: 'si', text: 'Singing lessons', value: 'singing lessons' },
-//   { key: 'vi', text: 'Video production', value: 'video production' },
-//   { key: 'ya', text: 'Yard work', value: 'yard work' },
-// ]
 const options = [
   'Arts & Crafts',
   'Babysitter',
@@ -42,25 +28,28 @@ export default class Post extends React.Component {
     this.state = {
       complete: false,
       error: false,
+      data: null
     };
   }
 
   handleSubmit = (event) => {
     let data = event.formData;
-    fetch('', {
-      "method": "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      "body": JSON.stringify(data)
-    }).then((response) => {
-      if (!response.ok) {
-        this.setState({ error: true });
-      } else {
-        this.setState({ complete: true });
-      }
-    })
-  }
+    fetch('http://localhost:5000/formSubmission', {
+    "method": "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    "body": JSON.stringify(data)
+  }).then((response) => {
+    if (response.status !== 200) {
+      this.setState({ error: true });
+      console.log("failed call to backend", response.status)
+    } else {
+      this.setState({ complete: true });
+      console.log("successful call to backend", response.status)
+    }
+  })
+}
 
   render() {
     if (this.state.complete) {
@@ -120,7 +109,11 @@ export default class Post extends React.Component {
         },
         "cost": {
           "type": "string",
-          "title": "Cost of service (if applicable)",
+          "title": "Service description and cost (Ex: Piano lessons, $50/hour)",
+        },
+        "acost": {
+          "type": "string",
+          "title": "Price range of products",
         },
         "email": {
           "type": "string",
@@ -152,6 +145,7 @@ export default class Post extends React.Component {
     return (
       <Container>
         <Grid>
+          {this.state.data}
           <Grid.Column width={6}>
             <Header as='h2'>Create your listing</Header>
             <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit} />

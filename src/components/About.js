@@ -37,7 +37,7 @@ class About extends Component {
         <SearchDropdown />
 
         <div className="ui animated button" tabIndex="0">
-            <div className="visible content">View All Listings</div>
+            <div className="visible content">Search</div>
             <div className="hidden content">
             <i className="right arrow icon"></i>
             </div>
@@ -48,12 +48,14 @@ class About extends Component {
         <i className="shop icon"></i>
         </div>
     </div>
-    <div className="ui animated fade button" tabIndex="0">
-        <div className="visible content">Advertise your business/service/product</div>
+    <Link to="/businesses"><div className="ui animated fade button" tabIndex="0">
+        <div className="visible content">View All Listings</div>
         <div className="hidden content">
-            Free Advertising
+          Search All
         </div>
+
     </div>
+    </Link>
 
         <h1 className='heading'>
         <Fade bottom cascade>Explore Business Departments</Fade></h1>

@@ -22,8 +22,19 @@ const options = [
 
 ]
 
+const cities = [
+  { key: 'sac', text: 'Sacramento, CA', value: 'sac' },
+  { key: 'sanjose', text: 'San Jose, CA', value: 'sanjose' },
+  { key: 'cambridge', text: 'Cambridge, MA', value: 'cambridge'},
+  { key: 'stanford', text: 'Stanford, CA', value: 'stanford' }
+
+]
+
 const DropdownExampleMultipleSelection = () => (
+<div>
   <Dropdown placeholder='Search for local businesses and self-employed' fluid multiple selection options={options} />
+  <Dropdown placeholder='Select a City' fluid multiple selection options={cities} />
+  </div>
 )
 
 export default DropdownExampleMultipleSelection
