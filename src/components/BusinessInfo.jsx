@@ -1,6 +1,9 @@
 import React from 'react';
 import { List, Image , Grid, Item, Header, Container} from 'semantic-ui-react';
 import Form from "@rjsf/semantic-ui";
+import Fade from 'react-reveal/Fade';
+import Project from './project';
+
 
 export default class BusinessInfo extends React.Component {
   constructor(props) {
@@ -17,21 +20,23 @@ export default class BusinessInfo extends React.Component {
                     "Website": "MooMooMilk.com",
                     "Facebook": "moo123",
                     "Location": "Indiana Farms"},
-      products: [{"Name": "Organic Milk Gallon",
-                  "Description": "Fresh Organic Milk with no GMOs",
-                  "Price": "$4.99", 
+      products: [{"id": 76545678,
+                  "Name": "Moo Moo Milk Teas",
+                  "Description": "Made with fresh milk from grassfed cows and no GMO's. Comes in matcha or original flavors!",
+                  "Price": "$3.99", 
                   "Ratings": 4.5,
-                  "Photo": []},
-                  {"Name": "Organic Milk Gallon",
-                  "Description": "Fresh Organic Milk with no GMOs",
+                  "Photo": "https://petitesmiles.files.wordpress.com/2014/09/moomoopic1.jpg"},
+                  {"Name": "Strawberry Milk",
+                  "Description": "Fresh chilled milk from grassfed cows and no GMOs.",
                   "Price": "$4.99", 
-                  "Ratings": 4.5,
-                  "Photo": []},
-                  {"Name": "Organic Milk Gallon",
-                  "Description": "Fresh Organic Milk with no GMOs",
-                  "Price": "$4.99", 
-                  "Ratings": 4.5,
-                  "Photo": []}],
+                  "Ratings": 5.0,
+                  "Photo": "https://i0.wp.com/yesmooretea.com/wp-content/uploads/2020/04/Strawberry-Milk-8226-scaled.jpg?fit=1877%2C2560&ssl=1"},
+                  // {"Name": "Organic Milk Gallon",
+                  // "Description": "Fresh Organic Milk with no GMOs",
+                  // "Price": "$4.99", 
+                  // "Ratings": 4.5,
+                  // "Photo": []}
+                ],
       reviews: [{"UserID": 382048, 
                  "UserName": "Jane Moo",
                  "Description": "It was amazing! I could feel myself getting stronger wow!", 
@@ -51,10 +56,10 @@ export default class BusinessInfo extends React.Component {
   renderMainInfo() {
       const mailTo = "mailto:"+this.state.contactInfo.Email;
     return <div>
-            <h2 class="ui center aligned icon header">
+            <h1 class="ui center aligned icon header">
               <i class="circular users icon"></i>
               {this.state.businessName}
-            </h2>
+            </h1>
             <p>{this.state.description}</p>
             <div class="ui list">
               <div class="item">
@@ -87,34 +92,57 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderProduct(product) {
-    return <Grid.Column>
-            <List.Item>
-              <div style={{alignSelf: "center"}}>
-                <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/>
-              </div>
-              <List.Content>
-                <List.Header as='a'>{product.Name}</List.Header>
-                <List.Description>
-                  {product.Description}
-                </List.Description>
-                <List.Description>
-                  {/* <Ratings rating={product.Ratings}/> */}
-                  {product.Price}
-                </List.Description>
+    // return <Grid.Column>
+    //         <List.Item>
+    //           <div style={{alignSelf: "center"}}>
+    //             <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/>
+    //           </div>
+    //           <List.Content>
+    //             <List.Header as='a'>{product.Name}</List.Header>
+    //             <List.Description>
+    //               {product.Description}
+    //             </List.Description>
+    //             <List.Description>
+    //               {/* <Ratings rating={product.Ratings}/> */}
+    //               {product.Price}
+    //             </List.Description>
                 
-              </List.Content>
-            </List.Item>
-          </Grid.Column>
+    //           </List.Content>
+    //         </List.Item>
+    //       </Grid.Column>
+
+    return <Grid.Column>
+      <Fade bottom>
+      <div>
+          <a href={product.url}>
+          <img src={product.Photo} alt={product.Name} style={{width:250, height:300}}></img>
+          </a>
+          <h2>{product.Name}</h2>
+          <span>{product.Description}</span>
+          <span>{product.Price}</span>
+      </div>
+    </Fade>
+  </Grid.Column>
   }
 
   renderProducts() {
-    const products = this.state.products.map ((product) =>  
-      this.renderProduct(product)
-    )
+    // const products = this.state.products.map ((product) =>  
+    //   this.renderProduct(product)
+    // )
+
     return <div>
-              <h4>Products</h4>
-              <Grid columns={3} divided>{products}</Grid>
-            </div>
+      <h1><Fade bottom cascade>Products/Services</Fade></h1>
+      <Grid columns={3} divided>
+        {this.state.products.map((product)=>(
+            this.renderProduct(product)
+        ))}
+      </Grid>
+    </div>
+
+    // return <div>
+    //           <h4>Products</h4>
+    //           <Grid columns={3} divided>{products}</Grid>
+    //         </div>
   }
 
   renderReview(review){
@@ -140,6 +168,7 @@ export default class BusinessInfo extends React.Component {
     const reviews = this.state.reviews.map ((review) =>
       this.renderReview(review)
     )
+    
     return <div>
       <h4>Reviews</h4>
       <List>{reviews}</List>
