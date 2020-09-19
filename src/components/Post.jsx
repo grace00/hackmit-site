@@ -32,7 +32,8 @@ const options = [
   'Sports & Outdoor',
   'Technology',
   'Video production',
-  'Yard work'
+  'Yard work',
+  'Other'
 ]
 
 export default class Post extends React.Component {

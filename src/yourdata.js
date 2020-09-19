@@ -26,28 +26,29 @@ export default
             //Project Image - Add Your Project Image Here
              imageSrc:"https://images.unsplash.com/photo-1491374812364-00028bbe7d2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3150&q=80",
              //Project URL - Add Your Project Url Here
-             url:'http://chetanverma.com/'
+             url: 'http://localhost:3000/#/businesses/1'
+           //  <Link to="/businesses/1">Link</Link>
             },
             {
                 id: 2,//DO NOT CHANGE THIS (Please)😅
                 title: 'Art',
                 service: 'Landscape Painter',
                 imageSrc: "https://images.unsplash.com/photo-1553173975-2b5eca89c41f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
-                url: 'http://chetanverma.com/'
+                url: 'http://localhost:3000/#/businesses/1'
             },
             {
                 id: 3,//DO NOT CHANGE THIS (Please)😅
                 title: 'Jewelry',
                 service: 'Origami Earrings',
                 imageSrc: "https://ae01.alicdn.com/kf/Hee2079c0722b4fc5b0fecb1d94069c38O/Handmade-Multicolor-Origami-Crane-Drop-Earrings-Resin-Paper-Colorful-Crane-Dangle-Earrings-Glitter-Ethnic-Exquisite-Jewelry.jpg",
-                url: 'http://chetanverma.com/'
+                url: 'http://localhost:3000/#/businesses/1'
             },
             {
                 id: 4,//DO NOT CHANGE THIS (Please)😅
                 title: 'Gardening',
                 service: 'Lawn Mowing',
                 imageSrc: "https://folsomlawnservice.com/wp-content/uploads/2011/05/smiley.jpg",
-                url: 'http://chetanverma.com/'
+                url: 'http://localhost:3000/#/businesses/1'
            }
 
                     /*

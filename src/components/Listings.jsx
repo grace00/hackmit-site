@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {Card} from 'semantic-ui-react'
-import SearchBar from '../components/SearchBar/SearchBar';
+import SearchDropdown from '../components/SearchBar/SearchBar';
 
 export default class Listings extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export default class Listings extends React.Component {
   render() {
     return (
       <div>
-           <SearchBar />
+           <SearchDropdown />
           <h1>listings</h1>
           {
             this.state.Data.map((item, index) => (
