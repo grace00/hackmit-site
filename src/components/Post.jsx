@@ -34,22 +34,23 @@ export default class Post extends React.Component {
 
   handleSubmit = (event) => {
     let data = event.formData;
+    data["reviews"] = [];
     fetch('http://localhost:5000/formSubmission', {
-    "method": "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    "body": JSON.stringify(data)
-  }).then((response) => {
-    if (response.status !== 200) {
-      this.setState({ error: true });
-      console.log("failed call to backend", response.status)
-    } else {
-      this.setState({ complete: true });
-      console.log("successful call to backend", response.status)
-    }
-  })
-}
+      "method": "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      "body": JSON.stringify(data)
+    }).then((response) => {
+      if (response.status !== 200) {
+        this.setState({ error: true });
+        console.log("failed call to backend", response.status)
+      } else {
+        this.setState({ complete: true });
+        console.log("successful call to backend", response.status)
+      }
+    })
+  }
 
   render() {
     if (this.state.complete) {
@@ -78,14 +79,6 @@ export default class Post extends React.Component {
         "image"
       ],*/
       "properties": {
-        "firstName": {
-          "type": "string",
-          "title": "First name",
-        },
-        "lastName": {
-          "type": "string",
-          "title": "Last name",
-        },
         "businessName": {
           "type": "string",
           "title": "Business name",
@@ -105,29 +98,48 @@ export default class Post extends React.Component {
         },
         "socialMedia": {
           "type": "string",
-          "title": "Link to social media",
-        },
-        "cost": {
-          "type": "string",
-          "title": "Service description and cost (Ex: Piano lessons, $50/hour)",
-        },
-        "acost": {
-          "type": "string",
-          "title": "Price range of products",
+          "title": "Link to social media or website",
         },
         "email": {
           "type": "string",
           "title": "Email",
         },
-        "phoneNumber": {
-          "type": "string",
-          "title": "Phone number",
-        },
         "image": {
-          "title": "Add a photo to your listing", /* why aren't the titles showing up?? */
-          "type": "string",
-          "format": "data-url",
+          "title": "Add a preview photo for your listing", /* why aren't the titles showing up?? */
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "format": "data-url",
+            },
+          }
         },
+        "products": {
+          "type": "array",
+          "title": "Services or products you offer",
+          "items": {
+            "type": "object",
+            "properties": {
+              "itemName": {
+                "type": "string",
+                "title": "Title",
+              },
+              "itemDescription": {
+                "type": "string",
+                "title": "Description",
+              },
+              "itemCost": {
+                "type": "string",
+                "title": "Cost",
+              },
+              "itemImage": {
+                "type": "string",
+                "title": "Photo",
+                "format": "data-url",
+              }
+            }
+          }
+        }
       }
     };
     let uiSchema = {
@@ -135,10 +147,7 @@ export default class Post extends React.Component {
         "ui:widget": "textarea"
       },
       "type": {
-        "ui:placeholder": "Choose business type"
-      },
-      "cost": {
-        "ui:placeholder": "$15/hr" /* not showing up for some reason */
+        "ui:placeholder": "Choose business type" /* not showing up for some reason */
       },
     }
 
@@ -146,7 +155,7 @@ export default class Post extends React.Component {
       <Container>
         <Grid>
           {this.state.data}
-          <Grid.Column width={6}>
+          <Grid.Column width={7}>
             <Header as='h2'>Create your listing</Header>
             <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit} />
           </Grid.Column>

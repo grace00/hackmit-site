@@ -9,12 +9,17 @@ import axios from 'axios';
 export default class BusinessInfo extends React.Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   businessInfo: props.BusinessInfo
+    // };
     this.state = {
+      businessInfo = [],
+
       businessName: "Moo Moo Milk",
       description: "Fresh Organic Milk grown from a local Indiana farm! No GMO's with a delicious taste.",
       contactInfo: {"First Name": "Bob",
                     "Last Name": "Builder",
-                    "Email": "moo@milk.com - ask us to collaborate with your business!",
+                    "Email": "moo@milk.com",
                     "Website": "MooMooMilk.com",
                     "Facebook": "moo123",
                     "Location": "Indiana Farms"},
@@ -47,9 +52,6 @@ export default class BusinessInfo extends React.Component {
                  "Time": new Date(),
                  "Rating": 1, 
                  "Photos": []}],
-      business: [],
-      complete: false,
-      error: false,
     }
   }
 
@@ -59,44 +61,44 @@ export default class BusinessInfo extends React.Component {
     .then(result => {
       console.log("result of getting business info", result.data)
       this.setState({
-        business: result.data
+        businessInfo: result.data
       })
     })
   }
 
+
   renderMainInfo() {
-    let { business } = this.state;
-    const mailTo = "mailto:"+ business.email;
+      const mailTo = "mailto:"+this.state.contactInfo.Email;
     return <div>
             <h1 class="ui center aligned icon header">
               <i class="circular users icon"></i>
-              {business.businessName}
+              {this.state.businessName}
             </h1>
-            <p>{business.description}</p>
+            <p>{this.state.description}</p>
             <div class="ui list">
               <div class="item">
                 <i class="users icon"></i>
                 <div class="content">
-                  {business.businessName}
+                  {this.state.businessName}
                 </div>
               </div>
               <div class="item">
                 <i class="marker icon"></i>
                 <div class="content">
-                  {business.location}
+                  {this.state.contactInfo.Location}
                 </div>
               </div>
               <div class="item">
                 <i class="mail icon"></i>
                 <div class="content">
-                  <a href="mailto:jack@semantic-ui.com">{business.email}</a>
+                  <a href="mailto:jack@semantic-ui.com">{this.state.contactInfo.Email}</a>
                 </div>
               </div>
               <div class="item">
                 <i class="linkify icon"></i>
                 <div class="content">
                   {/* <a href="http://www.semantic-ui.com">{this.state.contactInfo.Website}</a> */}
-                  <a href="http://www.google.com/"> {business.socialMedia}</a>
+                  <a href="http://www.google.com/"> {this.state.contactInfo.Website}</a>
                 </div>
               </div>
             </div>
@@ -122,16 +124,17 @@ export default class BusinessInfo extends React.Component {
     //           </List.Content>
     //         </List.Item>
     //       </Grid.Column>
+
     return <Grid.Column>
       <Fade bottom>
-          <div>
-          {/* <a href={product.url}> */}
-          {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height:300}}></img>}
-          {/* </a> */}
-          <h3>{product.itemName}</h3>
-          <p>{product.itemDescription}</p>
-          <p>{product.itemCost}</p>
-          </div>
+      <div>
+          <a href={product.url}>
+          <img src={product.Photo} alt={product.Name} style={{width:250, height:300}}></img>
+          </a>
+          <h3>{product.Name}</h3>
+          <p>{product.Description}</p>
+          <p>{product.Price}</p>
+      </div>
     </Fade>
   </Grid.Column>
   }
@@ -141,13 +144,10 @@ export default class BusinessInfo extends React.Component {
     //   this.renderProduct(product)
     // )
 
-    let { business } = this.state;
     return <div>
-      <h1>
-        <Fade bottom cascade>Products/Services</Fade>
-      </h1>
+      <h1><Fade bottom cascade>Products/Services</Fade></h1>
       <Grid columns={3} divided>
-        {business.products && business.products.map((product)=>(
+        {this.state.products.map((product)=>(
             this.renderProduct(product)
         ))}
       </Grid>
@@ -160,7 +160,7 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderReview(review){
-    let time = new Date(review.time);
+    console.log(review.Time.toDateString());
     return <Segment>
       <Fade bottom>
         <div style={{alignSelf: "center"}}>
@@ -168,13 +168,13 @@ export default class BusinessInfo extends React.Component {
           {/* <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/> */}
         </div>
         <List.Content>
-          <List.Header as='a'>{review.firstName + review.lastName}</List.Header>
+          <List.Header as='a'>{review.UserName}</List.Header>
           <List.Description>
-            {review.review}
+            {review.Description}
           </List.Description>
           <List.Description>
             {/* <Ratings rating={product.Ratings}/> */}
-            {time.toDateString()}
+            {review.Time.toDateString()}
           </List.Description>
         </List.Content>
       </Fade>
@@ -186,10 +186,10 @@ export default class BusinessInfo extends React.Component {
     // const reviews = this.state.reviews.map ((review) =>
     //   this.renderReview(review)
     // )
-    let { business } = this.state;
+    
     return <div>
       <h1><Fade bottom cascade>Reviews</Fade></h1>
-      {business.reviews && business.reviews.map((review)=>(
+      {this.state.reviews.map((review)=>(
             this.renderReview(review)
         ))}
     </div>
@@ -202,33 +202,26 @@ export default class BusinessInfo extends React.Component {
 
   handleSubmit = (event) => {
     let data = event.formData;
-    data["time"] = new Date();
-    console.log("review with time added", data)
-    let id = this.props.match.params.id;
-
-    fetch('http://localhost:5000/reviews/' + id, {
+    fetch('', {
       "method": "POST",
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       "body": JSON.stringify(data)
-    })
-    .then(blob => blob.json())
-    .then((result) => {
-      console.log("result", result)
-      this.setState({ 
-        complete: true,
-        business: result
-      });
+    }).then((response) => {
+      if (!response.ok) {
+        this.setState({ error: true });
+      } else {
+        this.setState({ complete: true });
+      }
     })
   }
-
 
   renderReviewForm(){
     if (this.state.complete) {
       return (
         <Container>
-          <Header as='h2'>Thank you for reviewing!</Header>
+          <Header as='h2'>Thank you! We received your listing.</Header>
         </Container>
       )
     } else if (this.state.error) {
@@ -249,9 +242,9 @@ export default class BusinessInfo extends React.Component {
           "type": "string",
           "title": "Last name",
         },
-        "review": {
+        "description": {
           "type": "string",
-          "title": "Review",
+          "title": "Description",
         },
         "email": {
           "type": "string",
