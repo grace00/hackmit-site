@@ -46,6 +46,34 @@ export default class Post extends React.Component {
     };
   }
 
+  handleSubmit = (event) => {
+    fetch('http://localhost:5000/express_backend', {
+    "method": "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then((response) => {
+    if (response.status !== 200) {
+      this.setState({ error: true });
+      console.log("failed call to backend", response.status)
+    } else {
+      this.setState({ complete: true });
+      console.log("successful call to backend", response.status)
+    }
+  })
+
+    /*
+    axios.post('/express_backend', {
+      name: "Grace"
+    }).then((response) => {
+      if (response.status === 200) {
+        console.log("successful call to backend")
+      }
+    }).catch((error) => {
+      console.log("error in backend response", error)
+    })*/
+  }
+
   componentDidMount() {
     // Call our fetch function below once the component mounts
     this.callBackendAPI()
@@ -54,7 +82,7 @@ export default class Post extends React.Component {
   }
   // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+    const response = await fetch('http://localhost:5000/express_backend');
     const body = await response.json();
 
     if (response.status !== 200) {
