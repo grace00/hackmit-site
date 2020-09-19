@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { Switch, HashRouter, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import MainPage from './components/MainPage';
