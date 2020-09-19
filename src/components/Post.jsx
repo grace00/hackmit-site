@@ -98,9 +98,9 @@ export default class Post extends React.Component {
           "type": "string",
           "title": "Link to social media or website",
         },
-        "phoneNumber": {
+        "email": {
           "type": "string",
-          "title": "Phone number",
+          "title": "Email",
         },
         "image": {
           "title": "Add a preview photo for your listing", /* why aren't the titles showing up?? */

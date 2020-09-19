@@ -101,7 +101,7 @@ export default class Listings extends React.Component {
           {
             this.state.Data.map((item, index) => (
               <Card
-                as={ Link } to='/businesses/1'
+                as={ Link } to={"/businesses/" + item.doc._id}
                 header={item.doc.businessName}
                 meta={item.doc.type}
                 description={item.doc.description}
