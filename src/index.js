@@ -6,9 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'; /* command npm i --save semantic-ui-css */
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 
