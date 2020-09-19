@@ -69,6 +69,9 @@ class About extends Component {
                      ></Project>
                 ))}
         </div>
+        <div>
+       <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Policies</a>
+        </div>
         </div>);
     }
 }
