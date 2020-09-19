@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { Switch, HashRouter, Route } from 'react-router-dom';
 import About from './components/About';
-import NavBar from './components/NavBar';
+import { Container } from 'semantic-ui-react'
+import './App.css';
+import NavBar from './components/NavBar/NavBar';
 import MainPage from './components/MainPage';
 import Listings from './components/Listings';
 import Post from './components/Post';
@@ -12,7 +12,7 @@ import BusinessInfo from './components/BusinessInfo';
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
+      <Container>
         <HashRouter>
           <NavBar />
           <Switch>
@@ -22,7 +22,7 @@ class App extends React.Component {
             <Route exact path='/businesses/1' component={BusinessInfo} /> {/* need to make dynammic later */}
           </Switch>
         </HashRouter>
-      </div>
+      </Container>
     );
   }
 }
