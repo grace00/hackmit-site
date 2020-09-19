@@ -17,15 +17,20 @@ import { Header, Grid, Container } from 'semantic-ui-react'
 //   { key: 'ya', text: 'Yard work', value: 'yard work' },
 // ]
 const options = [
+  'Arts & Crafts',
   'Babysitter',
+  'Beauty',
   'Cleaner',
   'Carpenter',
   'Dog walker',
   'Exterminator',
+  'Grocery',
   'Lawn care',
   'Photography',
   'Piano lessons',
   'Singing lessons',
+  'Sports & Outdoor',
+  'Technology',
   'Video production',
   'Yard work'
 ]
@@ -72,6 +77,16 @@ export default class Post extends React.Component {
     }
     let schema = {
       "type": "object",
+      /*"required": [
+        "firstName",
+        "lastName",
+        "businessName",
+        "type",
+        "description",
+        "location",
+        "email",
+        "image"
+      ],*/
       "properties": {
         "firstName": {
           "type": "string",
@@ -98,9 +113,13 @@ export default class Post extends React.Component {
           "type": "string",
           "title": "Location",
         },
-        "website": {
+        "socialMedia": {
           "type": "string",
-          "title": "Website",
+          "title": "Link to social media",
+        },
+        "cost": {
+          "type": "string",
+          "title": "Cost of service (if applicable)",
         },
         "email": {
           "type": "string",
@@ -123,6 +142,9 @@ export default class Post extends React.Component {
       },
       "type": {
         "ui:placeholder": "Choose business type"
+      },
+      "cost": {
+        "ui:placeholder": "$15/hr" /* not showing up for some reason */
       },
     }
 
