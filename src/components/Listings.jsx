@@ -99,7 +99,7 @@ export default class Listings extends React.Component {
                 <Card.Content extra>
                     <a>
                       <Icon name='star' />
-                      22 Reviews
+                      {Array(item.doc.reviews).length}  Reviews
                     </a>
                 </Card.Content>
               </Card>
