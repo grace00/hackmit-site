@@ -42,6 +42,16 @@ app.get('/businessData', (req, res) => {
   });
 })
 
+// get a specific business's info
+app.get('/businessData/:id', function(req, res) {
+  var mydb = cloudant.db.use("hackmit-database");
+  mydb.get(req.params.id, function(err, data) {
+    console.log('Error:', err);
+    console.log('Data:', data);
+    if (!err) { res.end(JSON.stringify(data)) }
+  });
+})
+
 
 
 /*https://medium.com/@maison.moa/setting-up-an-express-backend-server-for-create-react-app-bc7620b20a61*/

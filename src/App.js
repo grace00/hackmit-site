@@ -20,7 +20,8 @@ class App extends React.Component {
             <Route exact path='/' component={About} />
             <Route exact path='/businesses' component={Listings} />
             <Route exact path='/post' component={Post} />
-            <Route exact path='/businesses/1' component={BusinessInfo} /> {/* need to make dynammic later */}
+            {/*<Route exact path='/businesses/1' component={BusinessInfo} /> need to make dynammic later */}
+            <Route path='/businesses/:id' render={(props) => <BusinessInfo {...props} />} /> 
           </Switch>
         </HashRouter>
       </Container>

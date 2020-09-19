@@ -13,7 +13,33 @@ export default class BusinessInfo extends React.Component {
     //   businessInfo: props.BusinessInfo
     // };
     this.state = {
-      business: [],
+      businessInfo = [],
+
+      businessName: "Moo Moo Milk",
+      description: "Fresh Organic Milk grown from a local Indiana farm! No GMO's with a delicious taste.",
+      contactInfo: {"First Name": "Bob",
+                    "Last Name": "Builder",
+                    "Email": "moo@milk.com",
+                    "Website": "MooMooMilk.com",
+                    "Facebook": "moo123",
+                    "Location": "Indiana Farms"},
+      products: [{"id": 76545678,
+                  "Name": "Moo Moo Milk Teas",
+                  "Description": "Made with fresh milk from grassfed cows and no GMO's. Comes in matcha or original flavors!",
+                  "Price": "$3.99", 
+                  "Ratings": 4.5,
+                  "Photo": "https://petitesmiles.files.wordpress.com/2014/09/moomoopic1.jpg"},
+                  {"Name": "Strawberry Milk",
+                  "Description": "Fresh chilled milk from grassfed cows and no GMOs.",
+                  "Price": "$4.99", 
+                  "Ratings": 5.0,
+                  "Photo": "https://i0.wp.com/yesmooretea.com/wp-content/uploads/2020/04/Strawberry-Milk-8226-scaled.jpg?fit=1877%2C2560&ssl=1"},
+                  // {"Name": "Organic Milk Gallon",
+                  // "Description": "Fresh Organic Milk with no GMOs",
+                  // "Price": "$4.99", 
+                  // "Ratings": 4.5,
+                  // "Photo": []}
+                ],
       reviews: [{"UserID": 382048, 
                  "UserName": "Jane Moo",
                  "Description": "It was amazing! I could feel myself getting stronger wow!", 
@@ -35,45 +61,44 @@ export default class BusinessInfo extends React.Component {
     .then(result => {
       console.log("result of getting business info", result.data)
       this.setState({
-        business: result.data
+        businessInfo: result.data
       })
     })
   }
 
 
   renderMainInfo() {
-    let { business } = this.state;
-    const mailTo = "mailto:"+ business.email;
+      const mailTo = "mailto:"+this.state.contactInfo.Email;
     return <div>
             <h1 class="ui center aligned icon header">
               <i class="circular users icon"></i>
-              {business.businessName}
+              {this.state.businessName}
             </h1>
-            <p>{business.description}</p>
+            <p>{this.state.description}</p>
             <div class="ui list">
               <div class="item">
                 <i class="users icon"></i>
                 <div class="content">
-                  {business.businessName}
+                  {this.state.businessName}
                 </div>
               </div>
               <div class="item">
                 <i class="marker icon"></i>
                 <div class="content">
-                  {business.location}
+                  {this.state.contactInfo.Location}
                 </div>
               </div>
               <div class="item">
                 <i class="mail icon"></i>
                 <div class="content">
-                  <a href="mailto:jack@semantic-ui.com">{business.email}</a>
+                  <a href="mailto:jack@semantic-ui.com">{this.state.contactInfo.Email}</a>
                 </div>
               </div>
               <div class="item">
                 <i class="linkify icon"></i>
                 <div class="content">
                   {/* <a href="http://www.semantic-ui.com">{this.state.contactInfo.Website}</a> */}
-                  <a href="http://www.google.com/"> {business.socialMedia}</a>
+                  <a href="http://www.google.com/"> {this.state.contactInfo.Website}</a>
                 </div>
               </div>
             </div>
@@ -99,16 +124,17 @@ export default class BusinessInfo extends React.Component {
     //           </List.Content>
     //         </List.Item>
     //       </Grid.Column>
+
     return <Grid.Column>
       <Fade bottom>
-          <div>
-          {/* <a href={product.url}> */}
-          {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height:300}}></img>}
-          {/* </a> */}
-          <h3>{product.itemName}</h3>
-          <p>{product.itemDescription}</p>
-          <p>{product.itemCost}</p>
-          </div>
+      <div>
+          <a href={product.url}>
+          <img src={product.Photo} alt={product.Name} style={{width:250, height:300}}></img>
+          </a>
+          <h3>{product.Name}</h3>
+          <p>{product.Description}</p>
+          <p>{product.Price}</p>
+      </div>
     </Fade>
   </Grid.Column>
   }
@@ -118,13 +144,10 @@ export default class BusinessInfo extends React.Component {
     //   this.renderProduct(product)
     // )
 
-    let { business } = this.state;
     return <div>
-      <h1>
-        <Fade bottom cascade>Products/Services</Fade>
-      </h1>
+      <h1><Fade bottom cascade>Products/Services</Fade></h1>
       <Grid columns={3} divided>
-        {business.products && business.products.map((product)=>(
+        {this.state.products.map((product)=>(
             this.renderProduct(product)
         ))}
       </Grid>
