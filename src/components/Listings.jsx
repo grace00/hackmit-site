@@ -44,6 +44,7 @@ export default class Listings extends React.Component {
       <div>
           <SearchBar />
           <h1>listings</h1>
+          <Card.Group>
           {
             this.state.Data.map((item, index) => (
               <Card
@@ -51,9 +52,12 @@ export default class Listings extends React.Component {
                 header={item.doc.businessName}
                 meta={item.doc.type}
                 description={item.doc.description}
+                image={item.doc.image}
+                group
               />
           ))
           }
+          </Card.Group>
       </div>
     )
   }
