@@ -70,7 +70,7 @@ class About extends Component {
                 ))}
         </div>
         <div>
-       <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Policies</a>
+       <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Questions? Chat with our bot!</a>
         </div>
         </div>);
     }
