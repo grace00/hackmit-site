@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
+.nav-bar {
+  margin: 24px 0 24px 4px;
+}
+.nav-button {
+  font-weight: bold;
+  color: black;
+  padding: 8px 16px;
+}
+.outlined {
+  border: 1px solid rgba(128, 128, 128, 0.473);
+  border-radius: 7px;
+}
+.logo {
+  font-size: 24px;
+}

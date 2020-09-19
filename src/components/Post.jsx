@@ -71,7 +71,6 @@ export default class Post extends React.Component {
       )
     }
     let schema = {
-      "title": "Create your listing",
       "type": "object",
       "properties": {
         "firstName": {
@@ -131,6 +130,7 @@ export default class Post extends React.Component {
       <Container>
         <Grid>
           <Grid.Column width={6}>
+            <Header as='h2'>Create your listing</Header>
             <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit} />
           </Grid.Column>
         </Grid>
