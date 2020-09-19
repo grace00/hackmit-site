@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from "@rjsf/semantic-ui";
-import { Header, Grid, Container } from 'semantic-ui-react'
+import { Header, Grid, Container } from 'semantic-ui-react';
+import axios from 'axios';
 
 // const options = [
 //   { key: 'ba', text: 'Babysitter', value: 'babysitter' },
@@ -41,25 +42,26 @@ export default class Post extends React.Component {
     this.state = {
       complete: false,
       error: false,
+      data: null
     };
   }
 
-  handleSubmit = (event) => {
-    let data = event.formData;
-    fetch('', {
-      "method": "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      "body": JSON.stringify(data)
-    }).then((response) => {
-      if (!response.ok) {
-        this.setState({ error: true });
-      } else {
-        this.setState({ complete: true });
-      }
-    })
+  componentDidMount() {
+    // Call our fetch function below once the component mounts
+    this.callBackendAPI()
+      .then(res => this.setState({ data: res.express }))
+      .catch(err => console.log(err));
   }
+  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+  callBackendAPI = async () => {
+    const response = await fetch('/express_backend');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
 
   render() {
     if (this.state.complete) {
@@ -151,6 +153,7 @@ export default class Post extends React.Component {
     return (
       <Container>
         <Grid>
+          {this.state.data}
           <Grid.Column width={6}>
             <Header as='h2'>Create your listing</Header>
             <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit} />
