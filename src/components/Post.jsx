@@ -33,6 +33,7 @@ export default class Post extends React.Component {
 
   handleSubmit = (event) => {
     let data = event.formData;
+    data["reviews"] = [];
     fetch('http://localhost:5000/formSubmission', {
       "method": "POST",
       headers: {

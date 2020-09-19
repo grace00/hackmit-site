@@ -9,23 +9,10 @@ import axios from 'axios';
 export default class BusinessInfo extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   businessInfo: props.BusinessInfo
-    // };
     this.state = {
       business: [],
-      reviews: [{"UserID": 382048, 
-                 "UserName": "Jane Moo",
-                 "Description": "It was amazing! I could feel myself getting stronger wow!", 
-                 "Time": new Date(),
-                 "Rating": 5, 
-                 "Photo": null},
-                 {"UserID": 212342, 
-                 "UserName": "John Moo",
-                 "Description": "It tastes like over priced milk...", 
-                 "Time": new Date(),
-                 "Rating": 1, 
-                 "Photos": []}],
+      complete: false,
+      error: false,
     }
   }
 
@@ -39,7 +26,6 @@ export default class BusinessInfo extends React.Component {
       })
     })
   }
-
 
   renderMainInfo() {
     let { business } = this.state;
@@ -137,7 +123,7 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderReview(review){
-    console.log(review.Time.toDateString());
+    let time = new Date(review.time);
     return <Segment>
       <Fade bottom>
         <div style={{alignSelf: "center"}}>
@@ -145,13 +131,13 @@ export default class BusinessInfo extends React.Component {
           {/* <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/> */}
         </div>
         <List.Content>
-          <List.Header as='a'>{review.UserName}</List.Header>
+          <List.Header as='a'>{review.firstName + review.lastName}</List.Header>
           <List.Description>
-            {review.Description}
+            {review.review}
           </List.Description>
           <List.Description>
             {/* <Ratings rating={product.Ratings}/> */}
-            {review.Time.toDateString()}
+            {time.toDateString()}
           </List.Description>
         </List.Content>
       </Fade>
@@ -163,10 +149,10 @@ export default class BusinessInfo extends React.Component {
     // const reviews = this.state.reviews.map ((review) =>
     //   this.renderReview(review)
     // )
-    
+    let { business } = this.state;
     return <div>
       <h1><Fade bottom cascade>Reviews</Fade></h1>
-      {this.state.reviews.map((review)=>(
+      {business.reviews && business.reviews.map((review)=>(
             this.renderReview(review)
         ))}
     </div>
@@ -179,26 +165,33 @@ export default class BusinessInfo extends React.Component {
 
   handleSubmit = (event) => {
     let data = event.formData;
-    fetch('', {
+    data["time"] = new Date();
+    console.log("review with time added", data)
+    let id = this.props.match.params.id;
+
+    fetch('http://localhost:5000/reviews/' + id, {
       "method": "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       "body": JSON.stringify(data)
-    }).then((response) => {
-      if (!response.ok) {
-        this.setState({ error: true });
-      } else {
-        this.setState({ complete: true });
-      }
+    })
+    .then(blob => blob.json())
+    .then((result) => {
+      console.log("result", result)
+      this.setState({ 
+        complete: true,
+        business: result
+      });
     })
   }
+
 
   renderReviewForm(){
     if (this.state.complete) {
       return (
         <Container>
-          <Header as='h2'>Thank you! We received your listing.</Header>
+          <Header as='h2'>Thank you for reviewing!</Header>
         </Container>
       )
     } else if (this.state.error) {
@@ -219,9 +212,9 @@ export default class BusinessInfo extends React.Component {
           "type": "string",
           "title": "Last name",
         },
-        "description": {
+        "review": {
           "type": "string",
-          "title": "Description",
+          "title": "Review",
         },
         "email": {
           "type": "string",
