@@ -41,10 +41,15 @@ export default class SearchBar extends React.Component {
   }
 
   handleCategoryChange = (event, {value}) => {
-    console.log("categories in searchbar", value);
     // let categoryName = event.target.textContent;
     // console.log("categoryName",categoryName);
     this.props.updateCategories(value);
+  }
+
+  handleLocationChange = (event, {value}) => {
+    // let categoryName = event.target.textContent;
+    // console.log("categoryName",categoryName);
+    this.props.updateLocations(value);
   }
 
   render() {
@@ -55,7 +60,9 @@ export default class SearchBar extends React.Component {
           defaultValue={this.props.categories} 
           search
         />
-        <Dropdown placeholder='Select a City' fluid multiple selection options={cities} 
+        <Dropdown placeholder='Select a City' fluid multiple selection options={cities}
+          onChange={this.handleLocationChange}
+          defaultValue={this.props.locations} 
           search
         />
       </div>

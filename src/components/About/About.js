@@ -13,6 +13,9 @@ class About extends Component {
     updateCategories = (categories) => {
         this.props.updateCategories(categories);
     }
+    updateLocations = (locations) => {
+        this.props.updateLocations(locations);
+    }
     render() {
         return (<div>
             {/* <h1 className='heading-background'>BEEYOND</h1> */}
@@ -29,7 +32,7 @@ class About extends Component {
                                     Find small businesses and local professionals who can help you with anything.
                         </p>
                             </Fade>
-                            <SearchDropdown updateCategories={this.updateCategories} categories={this.props.categories}/>
+                            <SearchDropdown updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.props.locations} categories={this.props.categories}/>
                             <Link to={'/businesses'}>
                             <div className="ui animated button" tabIndex="0">
                                 <div className="visible content">Search</div>

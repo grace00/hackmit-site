@@ -15,13 +15,19 @@ class App extends React.Component {
     super(props);
     this.state = {
       categories: [],
+      locations: [],
     };
   }
 
   updateCategories = (categories) => {
-    console.log("updating categories here", categories)
     this.setState({
       categories
+    });
+  }
+
+  updateLocations = (locations) => {
+    this.setState({
+      locations
     });
   }
 
@@ -31,8 +37,8 @@ class App extends React.Component {
           <NavBar />
           {/* <Container> */}
           <Switch>
-            <Route exact path='/' render={props => <About {...props} updateCategories={this.updateCategories} categories={this.state.categories}/>}  />
-            <Route exact path='/businesses' render={props => <Listings {...props} updateCategories={this.updateCategories} categories={this.state.categories}/>} />
+            <Route exact path='/' render={props => <About {...props} updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.state.locations}  categories={this.state.categories}/>}  />
+            <Route exact path='/businesses' render={props => <Listings {...props} categories={this.state.categories}  locations={this.state.locations} />} />
             <Route exact path='/post' component={Post} />
             <Route path='/businesses/:id' render={(props) => <BusinessInfo {...props} />} /> 
           </Switch>

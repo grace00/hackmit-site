@@ -42,28 +42,29 @@ export default class Listings extends React.Component {
   }
 
   updateCategories = (categories) => {
-    console.log("listings update categories called", categories)
-    // save list of current categories
-    this.props.updateCategories(categories);
+   // this.props.updateCategories(categories);     // save list of current categories
+    // redundant?????
+    this.updateItems(categories, [])
+  }
+  
+
+  updateItems = (categories, locations) => {
+    // new function for cat + location?
+    console.log("cats in update items", categories)
     var filteredData = [];
     if (categories.length === 0) {
       filteredData = this.state.data;
     } else {
-      // filter data based on category changes
-      // go through items and add those that fit the user's selection
+      // filter data based on user's selection
       filteredData = this.state.data.filter(function (item) {
         var categoryList = categories;
-        console.log("item in? ", item.doc.type, categoryList.includes(item.doc.type))
+        // console.log("item in? ", item.doc.type, categoryList.includes(item.doc.type))
         return categoryList.includes(item.doc.type);
       })
     }
     this.setState({
       filteredData
     })
-  }
-
-  updateItems = (values) => {
-    console.log("updateItems called", values)
   }
 
   colorSwitch = (type) => {
@@ -108,7 +109,7 @@ export default class Listings extends React.Component {
   render() {
     return (
       <Container>
-        <SearchBar updateCategories={this.updateCategories} categories={this.props.categories} />
+        <SearchBar updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.props.locations} categories={this.props.categories} />
         <h1>Listings</h1>
         <Card.Group>
           {
