@@ -37,29 +37,37 @@ export default class Listings extends React.Component {
         this.setState({
           data: result.data
         })
-        this.updateCategories(this.props.categories);
+        this.updateItems(this.props.categories, this.props.locations);
       })
   }
 
   updateCategories = (categories) => {
-   // this.props.updateCategories(categories);     // save list of current categories
-    // redundant?????
-    this.updateItems(categories, [])
+    this.props.updateCategories(categories);   // save list of current categories
+    this.updateItems(categories, this.props.locations)
   }
-  
 
+  updateLocations = (locations) => {
+    this.props.updateLocations(locations);
+    this.updateItems(this.props.categories, locations)
+  }
+
+  // filter listings
   updateItems = (categories, locations) => {
-    // new function for cat + location?
-    console.log("cats in update items", categories)
+    console.log("update items", categories, locations)
     var filteredData = [];
-    if (categories.length === 0) {
+    if (categories.length === 0 && locations.length === 0) { // no filtering
       filteredData = this.state.data;
-    } else {
-      // filter data based on user's selection
+    } else if (categories.length >= 0 && locations.length === 0) { // category, no location
       filteredData = this.state.data.filter(function (item) {
-        var categoryList = categories;
-        // console.log("item in? ", item.doc.type, categoryList.includes(item.doc.type))
-        return categoryList.includes(item.doc.type);
+        return categories.includes(item.doc.type);
+      })
+    } else if (categories.length === 0 && locations.length >= 0) { // location, no category
+      filteredData = this.state.data.filter(function (item) {
+        return locations.includes(item.doc.location);
+      })
+    } else {
+      filteredData = this.state.data.filter(function (item) { // category and location -> listing must be in some combinatin of selected cat and loc
+        return locations.includes(item.doc.location) && categories.includes(item.doc.type);
       })
     }
     this.setState({

@@ -2,7 +2,7 @@ import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
 
 const options = [
-  { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'Arts & Crafts' },
+  { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'Arts & Crafts' }, // values need to exactly match the dropdown options in forms
   { key: 'babysitters', text: 'Babysitters', value: 'Babysitters' },
   { key: 'beauty', text: 'Beauty', value: 'Beauty' },
   { key: 'cleaners', text: 'Cleaners', value: 'Cleaners' },
@@ -23,10 +23,10 @@ const options = [
 ]
 
 const cities = [
-  { key: 'sac', text: 'Sacramento, CA', value: 'sac' },
-  { key: 'sanjose', text: 'San Jose, CA', value: 'sanjose' },
-  { key: 'cambridge', text: 'Cambridge, MA', value: 'cambridge' },
-  { key: 'stanford', text: 'Stanford, CA', value: 'stanford' }
+  { key: 'sac', text: 'Sacramento, CA', value: 'Sacramento, CA' },
+  { key: 'sanjose', text: 'San Jose, CA', value: 'San Jose, CA' },
+  { key: 'cambridge', text: 'Cambridge, MA', value: 'Cambridge, MA' },
+  { key: 'stanford', text: 'Stanford, CA', value: 'Stanford, CA' }
 ]
 
 export default class SearchBar extends React.Component {
