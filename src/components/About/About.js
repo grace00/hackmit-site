@@ -5,7 +5,8 @@ import data from '../../yourdata';
 import Project from '../project';
 import SearchDropdown from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
-import { Header, Grid, Container } from 'semantic-ui-react';
+import { Header, Grid, Container, Button, Icon } from 'semantic-ui-react';
+import Splash from './splash.png';
 
 class About extends Component {
     state = {}
@@ -22,7 +23,7 @@ class About extends Component {
             <div className='splash-section'>
                 <Container className="splash-content-container">
                     <Grid>
-                        <Grid.Column width={9}>
+                        <Grid.Column width={8}>
                             <Fade bottom>
                                 <p className="main-header">
                                     {data.headerTagline[0]}<br></br>{data.headerTagline[1]}<br></br>
@@ -41,13 +42,8 @@ class About extends Component {
                                 </div>
                             </div>
                             </Link>
-                            <div className="ui vertical animated button" tabIndex="0">
-                                <div className="hidden content">Donate</div>
-                                <div className="visible content">
-                                    <i className="shop icon"></i>
-                                </div>
-                            </div>
-                            <Link to="/businesses"><div className="ui animated fade button" tabIndex="0">
+
+                            <Link to="/businesses"><div className="ui animated fade button tiny basic" tabIndex="0">
                                 <div className="visible content">View All Listings</div>
                                 <div className="hidden content">
                                     Search All
@@ -55,9 +51,16 @@ class About extends Component {
 
                             </div>
                             </Link>
+                            <div className="ui animated fade button tiny basic" tabIndex="0">
+                                <div className="hidden content">Donate</div>
+                                <div className="visible content">
+                                    <i className="shop icon"></i>
+                                </div>
+                            </div>
+                            
                         </Grid.Column>
                         <Grid.Column width={3}>
-
+                        <img src={Splash} className="splash-image" />
                         </Grid.Column>
                     </Grid>
                 </Container>

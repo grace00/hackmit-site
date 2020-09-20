@@ -6,6 +6,10 @@
 .splash-content-container {
   padding-top: 80px;
 }
+.splash-image {
+  width: 420px;
+  margin-left: 80px;
+}
 .main-header {
   font-size: 36px;
   font-weight: bold;
