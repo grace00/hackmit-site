@@ -1,10 +1,35 @@
 import React from 'react';
-import { List, Image , Grid, Item, Header, Container, Icon, Segment} from 'semantic-ui-react';
+import {Form as Form1, List, Image , Grid, Item, Header, Container, Icon, Segment, Checkbox, Rating, Visibility} from 'semantic-ui-react';
 import Form from "@rjsf/semantic-ui";
 import Fade from 'react-reveal/Fade';
 import Project from './project';
 import axios from 'axios';
+import _ from 'lodash'
 
+const overlayStyle = {
+  position: 'absolute',
+  right: '400px',
+  // top: '200px',
+  transition: 'box-shadow 0.5s ease, padding 0.5s ease',
+  fontSize: 20,
+}
+
+const fixedOverlayStyle = {
+  ...overlayStyle,
+  position: 'fixed',
+  float: 'right',
+  top: '80px',
+  zIndex: 10,
+}
+
+const overlayMenuStyle = {
+  position: 'absolute',
+  transition: 'left 0.5s ease',
+}
+
+const fixedOverlayMenuStyle = {
+  ...overlayMenuStyle,
+}
 
 export default class BusinessInfo extends React.Component {
   constructor(props) {
@@ -50,6 +75,9 @@ export default class BusinessInfo extends React.Component {
       business: [],
       complete: false,
       error: false,
+      newReview: {},
+      overlayFixed: false,
+      overlayRect: false,
     }
   }
 
@@ -66,41 +94,28 @@ export default class BusinessInfo extends React.Component {
 
   renderMainInfo() {
     let { business } = this.state;
-    const mailTo = "mailto:"+ business.email;
     return <div>
-            <h1 class="ui center aligned icon header">
-              <i class="circular users icon"></i>
-              {business.businessName}
-            </h1>
-            <p>{business.description}</p>
-            <div class="ui list">
-              <div class="item">
-                <i class="users icon"></i>
-                <div class="content">
+            <div style={{display: 'flex', flexDirection: "row", justifyContent: "flex-start"  }}>
+              {business.image && <img src={business.image.file} alt={business.businessName} class="ui rounded image"></img>}
+              <div style={{display: 'flex', flexDirection: 'column', paddingLeft: 60}}>
+                <p style={{fontSize: 40, fontWeight: 'bold'}}>
                   {business.businessName}
+                </p>
+                <div style={{display: 'flex', flexDirection: "row", justifyContent: 'flex-start'}}>
+                  <Rating icon='star' maxRating={5} defaultRating={3} size='large' disabled style={{paddingRight: 10}}/>
+                  {"3.0/5 (24 Reviews)"}
                 </div>
               </div>
-              <div class="item">
-                <i class="marker icon"></i>
-                <div class="content">
-                  {business.location}
-                </div>
-              </div>
-              <div class="item">
-                <i class="mail icon"></i>
-                <div class="content">
-                  <a href="mailto:jack@semantic-ui.com">{business.email}</a>
-                </div>
-              </div>
-              <div class="item">
-                <i class="linkify icon"></i>
-                <div class="content">
-                  {/* <a href="http://www.semantic-ui.com">{this.state.contactInfo.Website}</a> */}
-                  <a href="http://www.google.com/"> {business.socialMedia}</a>
-                </div>
-              </div>
-            </div>
+            </div>            
           </div>
+  }
+
+  renderAboutInfo() {
+    let { business } = this.state;
+    return <div>
+      <h1>About</h1>
+      <p>{business.description}</p>
+    </div>
   }
 
   renderProduct(product) {
@@ -173,7 +188,7 @@ export default class BusinessInfo extends React.Component {
             {review.review}
           </List.Description>
           <List.Description>
-            {/* <Ratings rating={product.Ratings}/> */}
+            {/* <Ratings rating={review.Ratings}/> */}
             {time.toDateString()}
           </List.Description>
         </List.Content>
@@ -187,12 +202,16 @@ export default class BusinessInfo extends React.Component {
     //   this.renderReview(review)
     // )
     let { business } = this.state;
-    return <div>
-      <h1><Fade bottom cascade>Reviews</Fade></h1>
-      {business.reviews && business.reviews.map((review)=>(
-            this.renderReview(review)
-        ))}
-    </div>
+    return <Container>
+      <Grid>
+        <Grid.Column width={6}>
+          <h1><Fade bottom cascade>Reviews</Fade></h1>
+          {business.reviews && business.reviews.map((review)=>(
+                this.renderReview(review)
+            ))}
+        </Grid.Column>
+      </Grid>
+    </Container>
 
     // return <div>
     //   <h1>Reviews</h1>
@@ -223,6 +242,13 @@ export default class BusinessInfo extends React.Component {
     })
   }
 
+  handleOverlayRef = (c) => {
+    const { overlayRect } = this.state
+
+    if (!overlayRect) {
+      this.setState({ overlayRect: _.pick(c.getBoundingClientRect(), 'height', 'width') })
+    }
+  }
 
   renderReviewForm(){
     if (this.state.complete) {
@@ -262,10 +288,15 @@ export default class BusinessInfo extends React.Component {
           "type": "string",
           "format": "data-url",
         },
+        "rating": {
+          "title": "Rate out of 5",
+          "type": "number",
+        }
       }
     };
+
     let uiSchema = {
-      "description": {
+      "review": {
         "ui:widget": "textarea"
       }
     }
@@ -273,7 +304,7 @@ export default class BusinessInfo extends React.Component {
     return (
       <Container>
         <Grid>
-          <Grid.Column width={6}>
+          <Grid.Column width={8}>
             <Header as='h2'>Write a Review</Header>
             <Form schema={schema} uiSchema={uiSchema} onSubmit={this.handleSubmit} />
           </Grid.Column>
@@ -282,10 +313,61 @@ export default class BusinessInfo extends React.Component {
     )
   }
 
+
+  stickOverlay = () => this.setState({ overlayFixed: true })
+  unStickOverlay = () => this.setState({ overlayFixed: false })
+
+  renderContactMenu() {
+    let { business } = this.state;
+    
+    return <Container>
+      <Visibility
+        offset={80}
+        once={false}
+        onTopPassed={this.stickOverlay}
+        onTopVisible={this.unStickOverlay}
+        style={this.state.overlayFixed ? { ...overlayStyle, ...this.state.overlayRect } : {}}
+      />
+      <div ref={this.handleOverlayRef} style={this.state.overlayFixed ? fixedOverlayStyle : overlayStyle}>
+          <div class="ui list" style={this.state.overlayFixed ? fixedOverlayMenuStyle : overlayMenuStyle}>
+            <div class="item">
+              <i class="users icon"></i>
+              <div class="content">
+                {business.businessName}
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                {business.location}
+              </div>
+            </div>
+            <div class="item">
+              <i class="mail icon"></i>
+              <div class="content">
+                <a href="mailto:jack@semantic-ui.com">{business.email}</a>
+              </div>
+            </div>
+            <div class="item">
+              <i class="linkify icon"></i>
+              <div class="content">
+                {/* <a href="http://www.semantic-ui.com">{this.state.contactInfo.Website}</a> */}
+                <a href="http://www.google.com/"> {business.socialMedia}</a>
+              </div>
+            </div>
+          </div>
+      </div> 
+    </Container>
+  };
+
   render() {
     return (
       <Container>
+        {this.renderContactMenu()}
+        <br/>
         {this.renderMainInfo()}
+        <hr color="#D3D3D3" style={{marginLeft: 0, marginTop: 30, marginBottom: 30, width: "70%"}}/>
+        {this.renderAboutInfo()}
         <br/>
         {this.renderProducts()}
         <br/>
@@ -295,16 +377,4 @@ export default class BusinessInfo extends React.Component {
       </Container>
     )
   }
-}
-
-class Product extends React.Component {
-
-}
-
-class Review extends React.Component {
-
-}
-
-class ReviewForm extends React.Component {
-
 }
