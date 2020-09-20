@@ -63,6 +63,21 @@ class About extends Component {
                 </Container>
             </div>
 
+            <div className='work'>
+            <h1 className='heading'>
+                <Fade bottom cascade>Explore Business Departments</Fade></h1>
+            <div className='work-content'>
+                {data.projects.map((project) => (
+                    <Project key={project.id}
+                        title={project.title}
+                        service={project.service}
+                        imageSrc={project.imageSrc}
+                        url={project.url}
+                    ></Project>
+                ))}
+            </div>
+        </div>
+        
             <div className='about'>
                 <div>
                     <h1><Fade bottom cascade>About.</Fade></h1>
@@ -77,18 +92,6 @@ class About extends Component {
             </div>
 
 
-            <h1 className='heading'>
-                <Fade bottom cascade>Explore Business Departments</Fade></h1>
-            <div className='work-content'>
-                {data.projects.map((project) => (
-                    <Project key={project.id}
-                        title={project.title}
-                        service={project.service}
-                        imageSrc={project.imageSrc}
-                        url={project.url}
-                    ></Project>
-                ))}
-            </div>
             <div>
                 <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Questions? Chat with our bot!</a>
             </div>

@@ -14,3 +14,71 @@
   font-size: 22px;
   font-weight: 'light';
 }
+.about{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top:10em;
+}
+.about-content{
+  position: relative;
+  left:0em;
+  top:5em;
+}
+.work{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left:15em;
+  top:8em;
+  align-items: flex-start;
+}
+.heading{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3em;
+  text-align: left;
+}
+.work-content{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 2em;
+}
+
+.project img{
+width: 30em;
+height: 30em;
+}
+.email{
+  color:black;
+  font-size: 2em;
+}
+.li{
+  display: inline-block;
+  margin-top:0;
+  margin-bottom: 0;
+  margin-right: 1em;
+  margin-left: 0;
+}
+.li a{
+  text-decoration: none;
+  color:black;
+}
+.footer{
+  position: relative;
+  top:2em;
+  padding: 1em;
+}
+.footer a{
+  text-decoration: none;
+  color:#2c59fb;
+}
+.contact-content{
+  position: relative;
+  top:20em;
+  left:15em;
+  text-align: left;
+}
+.amazing-color{
+  color:#9352ae;
+  opacity: 1;
+}
