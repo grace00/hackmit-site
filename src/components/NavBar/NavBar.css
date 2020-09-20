@@ -1,17 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
-
+body { overflow-x:hidden;  }
+.nav-background {
+  overflow-x:hidden;
+  background-color: #FED728;
+  margin-bottom: 44px;
+}
 .nav-bar {
-  margin: 24px 0 24px 4px;
+  padding: 24px 0 24px 4px;
 }
 .nav-button {
   font-weight: bold;
   color: black;
-  padding: 8px 16px;
-}
-.outlined {
-  border: 2px solid rgb(202, 202, 202);
-  border-radius: 7px;
+  padding: 14px 22px;
 }
 .logo {
   font-size: 24px;
+  color: black;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.outlined {
+  color: white;
+  background-color: #33ACBF;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-left: 20px;
 }
