@@ -173,7 +173,7 @@ export default class BusinessInfo extends React.Component {
           {/* <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/> */}
         </div>
         <div style={{flexDirection: 'row', display: 'flex', justifyContent: 'flex-start'}}>
-          <p style={{fontSize:18, marginBottom: 5, fontWeight: 'bold'}}>{review.firstName + review.lastName}</p>
+          <p style={{fontSize:18, marginBottom: 5, fontWeight: 'bold'}}>{review.firstName + ' ' + review.lastName}</p>
           {review.rating 
             && <Rating icon='star' maxRating={5} defaultRating={review.rating} size='tiny' disabled style={{paddingTop: 7, paddingLeft: 10}}/>}
           {/* {review.image && <img src={review.image} alt={review.review} class="ui rounded image"></img>} */}
@@ -205,7 +205,7 @@ export default class BusinessInfo extends React.Component {
     console.log("review with time added", data)
     let id = this.props.match.params.id;
 
-    fetch('http://localhost:5000/reviews/' + id, {
+    fetch('http://localhost:3000/reviews/' + id, {
       "method": "POST",
       headers: {
         'Content-Type': 'application/json',
