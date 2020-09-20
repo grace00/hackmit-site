@@ -8,7 +8,7 @@ import _ from 'lodash'
 
 const overlayStyle = {
   position: 'absolute',
-  right: '400px',
+  right: '30%',
   // top: '200px',
   transition: 'box-shadow 0.5s ease, padding 0.5s ease',
   fontSize: 20,
@@ -18,7 +18,7 @@ const fixedOverlayStyle = {
   ...overlayStyle,
   position: 'fixed',
   float: 'right',
-  top: '80px',
+  top: '100px',
   zIndex: 10,
 }
 
@@ -29,6 +29,16 @@ const overlayMenuStyle = {
 
 const fixedOverlayMenuStyle = {
   ...overlayMenuStyle,
+}
+
+const horizontalBarStyle ={
+  marginLeft: 0, 
+  marginTop: 30, 
+  marginBottom: 30, 
+  width: "70%", 
+  border: "none", 
+  height: 1, 
+  backgroundColor: "#D3D3D3",
 }
 
 export default class BusinessInfo extends React.Component {
@@ -102,8 +112,8 @@ export default class BusinessInfo extends React.Component {
                   {business.businessName}
                 </p>
                 <div style={{display: 'flex', flexDirection: "row", justifyContent: 'flex-start'}}>
-                  <Rating icon='star' maxRating={5} defaultRating={3} size='large' disabled style={{paddingRight: 10}}/>
-                  {"3.0/5 (24 Reviews)"}
+                  <Rating icon='star' maxRating={5} defaultRating={4} size='large' disabled style={{paddingRight: 10}}/>
+                  {"4.2/5 (24 Reviews)"}
                 </div>
               </div>
             </div>            
@@ -113,36 +123,17 @@ export default class BusinessInfo extends React.Component {
   renderAboutInfo() {
     let { business } = this.state;
     return <div>
-      <h1>About</h1>
-      <p>{business.description}</p>
+        <h1>About</h1>
+        <p>{business.description}</p>
     </div>
   }
 
   renderProduct(product) {
-    // return <Grid.Column>
-    //         <List.Item>
-    //           <div style={{alignSelf: "center"}}>
-    //             <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/>
-    //           </div>
-    //           <List.Content>
-    //             <List.Header as='a'>{product.Name}</List.Header>
-    //             <List.Description>
-    //               {product.Description}
-    //             </List.Description>
-    //             <List.Description>
-    //               {/* <Ratings rating={product.Ratings}/> */}
-    //               {product.Price}
-    //             </List.Description>
-                
-    //           </List.Content>
-    //         </List.Item>
-    //       </Grid.Column>
     return <Grid.Column>
       <Fade bottom>
           <div>
-          {/* <a href={product.url}> */}
-          {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height: "auto"}}></img>}
-          {/* </a> */}
+          {/* {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height:300}}></img>} */}
+          {product.itemImage && <img src={product.itemImage} alt={product.itemName} class="ui rounded image"></img>}
           <h3>{product.itemName}</h3>
           <p>{product.itemDescription}</p>
           <p>{product.itemCost}</p>
@@ -152,26 +143,19 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderProducts() {
-    // const products = this.state.products.map ((product) =>  
-    //   this.renderProduct(product)
-    // )
-
     let { business } = this.state;
     return <div>
       <h1>
-        <Fade bottom cascade>Products/Services</Fade>
+        <Fade bottom cascade>Products / Services</Fade>
       </h1>
-      <Grid columns={3} divided>
+      <br/>
+      <Grid columns={3} >
         {business.products && business.products.map((product)=>(
             this.renderProduct(product)
         ))}
       </Grid>
+      <br/>
     </div>
-
-    // return <div>
-    //           <h4>Products</h4>
-    //           <Grid columns={3} divided>{products}</Grid>
-    //         </div>
   }
 
   renderReview(review){
@@ -198,9 +182,6 @@ export default class BusinessInfo extends React.Component {
   }
 
   renderReviews(){
-    // const reviews = this.state.reviews.map ((review) =>
-    //   this.renderReview(review)
-    // )
     let { business } = this.state;
     return <Container>
       <Grid>
@@ -212,11 +193,6 @@ export default class BusinessInfo extends React.Component {
         </Grid.Column>
       </Grid>
     </Container>
-
-    // return <div>
-    //   <h1>Reviews</h1>
-    //   <List>{reviews}</List>
-    // </div>
   }
 
   handleSubmit = (event) => {
@@ -322,7 +298,7 @@ export default class BusinessInfo extends React.Component {
     
     return <Container>
       <Visibility
-        offset={80}
+        offset={100}
         once={false}
         onTopPassed={this.stickOverlay}
         onTopVisible={this.unStickOverlay}
@@ -366,11 +342,11 @@ export default class BusinessInfo extends React.Component {
         {this.renderContactMenu()}
         <br/>
         {this.renderMainInfo()}
-        <hr color="#D3D3D3" style={{marginLeft: 0, marginTop: 30, marginBottom: 30, width: "70%"}}/>
+        <hr style={horizontalBarStyle}/>
         {this.renderAboutInfo()}
-        <br/>
+        <hr style={horizontalBarStyle}/>
         {this.renderProducts()}
-        <br/>
+        <hr style={horizontalBarStyle}/>
         {this.renderReviews()}
         <br/>
         {this.renderReviewForm()}
