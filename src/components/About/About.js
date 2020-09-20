@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { Header, Dropdown, Grid, Container, Button, Icon } from 'semantic-ui-react';
 import Splash from './splash.png';
 import Bee from './bee.png';
+import logo from './beeyondpic.png';
 
 class About extends Component {
     state = {}
@@ -18,9 +19,12 @@ class About extends Component {
     updateLocations = (locations) => {
         this.props.updateLocations(locations);
     }
+
+
     render() {
         return (<div>
             {
+
                 <h1 className='heading-background'>BEEYOND</h1>}
             <div className='splash-section'>
             <p className='bot'>
@@ -67,7 +71,7 @@ class About extends Component {
 
                         </Grid.Column>
                         <Grid.Column width={3}>
-                            <img src={Splash} className="splash-image" />
+                            <img src={logo} className="splash-image" />
                         </Grid.Column>
                     </Grid>
                 </Container>
