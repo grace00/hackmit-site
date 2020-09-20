@@ -205,7 +205,7 @@ export default class BusinessInfo extends React.Component {
     console.log("review with time added", data)
     let id = this.props.match.params.id;
 
-    fetch('http://localhost:3000/reviews/' + id, {
+    fetch('http://localhost:5000/reviews/' + id, {
       "method": "POST",
       headers: {
         'Content-Type': 'application/json',
