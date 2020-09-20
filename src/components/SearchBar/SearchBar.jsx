@@ -1,5 +1,6 @@
 import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
+import './SearchBar.css'
 
 const options = [
   { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'Arts & Crafts' }, // values need to exactly match the dropdown options in forms
@@ -54,17 +55,21 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <Dropdown placeholder='Search for local businesses and self-employed' fluid multiple selection options={options}
+      <div className="input-container">
+        <div style={{width: "300px"}}>
+        <Dropdown placeholder='What are you looking for?' fluid multiple selection options={options}
           onChange={this.handleCategoryChange}
           defaultValue={this.props.categories} 
           search
         />
-        <Dropdown placeholder='Select a City' fluid multiple selection options={cities}
+        </div>
+        <div style={{width: "200px"}}>
+        <Dropdown placeholder='City' fluid multiple selection options={cities}
           onChange={this.handleLocationChange}
           defaultValue={this.props.locations} 
           search
         />
+        </div>
       </div>
     )
   }

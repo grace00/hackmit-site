@@ -141,7 +141,7 @@ export default class BusinessInfo extends React.Component {
       <Fade bottom>
           <div>
           {/* <a href={product.url}> */}
-          {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height:300}}></img>}
+          {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height: "auto"}}></img>}
           {/* </a> */}
           <h3>{product.itemName}</h3>
           <p>{product.itemDescription}</p>

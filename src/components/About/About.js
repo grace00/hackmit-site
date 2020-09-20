@@ -5,7 +5,7 @@ import data from '../../yourdata';
 import Project from '../project';
 import SearchDropdown from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
-import { Header, Grid, Container, Button, Icon } from 'semantic-ui-react';
+import { Header, Dropdown, Grid, Container, Button, Icon } from 'semantic-ui-react';
 import Splash from './splash.png';
 
 class About extends Component {
@@ -20,7 +20,7 @@ class About extends Component {
     render() {
         return (<div>
             {
-             <h1 className='heading-background'>BEEYOND</h1> }
+                <h1 className='heading-background'>BEEYOND</h1>}
             <div className='splash-section'>
                 <Container className="splash-content-container">
                     <Grid>
@@ -34,15 +34,17 @@ class About extends Component {
                                     Find small businesses and local professionals who can help you with anything.
                         </p>
                             </Fade>
-                            <SearchDropdown updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.props.locations} categories={this.props.categories}/>
-                            <Link to={'/businesses'}>
-                            <div className="ui animated button" tabIndex="0">
-                                <div className="visible content">Search</div>
-                                <div className="hidden content">
-                                    <i className="right arrow icon"></i>
-                                </div>
-                            </div>
-                            </Link>
+                            <Button as='div' labelPosition='left' style={{margin: "16px 0"}}>
+                                <SearchDropdown updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.props.locations} categories={this.props.categories} />
+                                <Link to={'/businesses'}>
+                                    <div className="ui animated secondary button" tabIndex="0">
+                                        <div className="visible content">Search</div>
+                                        <div className="hidden content">
+                                            <i className="right arrow icon"></i>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </Button>
 
                             <Link to="/businesses"><div className="ui animated fade button tiny basic" tabIndex="0">
                                 <div className="visible content">View All Listings</div>
@@ -58,29 +60,29 @@ class About extends Component {
                                     <i className="shop icon"></i>
                                 </div>
                             </div>
-                            
+
                         </Grid.Column>
                         <Grid.Column width={3}>
-                        <img src={Splash} className="splash-image" />
+                            <img src={Splash} className="splash-image" />
                         </Grid.Column>
                     </Grid>
                 </Container>
             </div>
 
-            <div className='work'>
-            <h1 className='heading'>
-                <Fade bottom cascade>Explore Business Departments</Fade></h1>
-            <div className='work-content'>
-                {data.projects.map((project) => (
-                    <Project key={project.id}
-                        title={project.title}
-                        service={project.service}
-                        imageSrc={project.imageSrc}
-                        url={project.url}
-                    ></Project>
-                ))}
-            </div>
-        </div>
+            <Container>
+
+                    <Fade bottom cascade><Header as="h1" style={{margin: "48px 0"}}>Explore Businesses</Header></Fade>
+                <div className='work-content'>
+                    {data.projects.map((project) => (
+                        <Project key={project.id}
+                            title={project.title}
+                            service={project.service}
+                            imageSrc={project.imageSrc}
+                            url={project.url}
+                        ></Project>
+                    ))}
+                </div>
+                </Container>
 
             <div className='about'>
                 <div className='about-content'>

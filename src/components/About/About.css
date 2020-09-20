@@ -8,11 +8,15 @@
 }
 .splash-image {
   width: 420px;
-  margin-left: 80px;
+  margin-left: 108px;
 }
 .main-header {
   font-size: 36px;
   font-weight: bold;
+}
+.inline-button {
+  float: right;
+  display: inline-block;
 }
 .sub-main-header {
   font-size: 22px;
