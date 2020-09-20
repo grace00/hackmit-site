@@ -19,8 +19,12 @@ class About extends Component {
     render() {
         return (<div>
             {
+
              <h1 className='heading-background'>BEEYOND</h1> }
             <div className='splash-section'>
+            <p className='bot'>
+                <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Questions? Chat with our bot!</a>
+            </p>
                 <Container className="splash-content-container">
                     <Grid>
                         <Grid.Column width={9}>
@@ -93,9 +97,7 @@ class About extends Component {
             </div>
 
 
-            <div>
-                <a target="_blank" href="https://covid-assistant-simple-mythili.mybluemix.net">Questions? Chat with our bot!</a>
-            </div>
+
         </div>);
     }
 }

@@ -1,4 +1,5 @@
 .splash-section {
+  position: relative;
   background-color: #FED728;
   height: 540px;
   margin-top: -48px;
@@ -33,10 +34,10 @@
   top:8em;
   align-items: flex-start;
 }
-.heading{
+h1{
   font-family: 'Montserrat', sans-serif;
-  font-size: 3em;
-  text-align: left;
+  font-size: 300em;
+  text-align: center;
 }
 .work-content{
   display: grid;
@@ -81,4 +82,13 @@ height: 30em;
 .amazing-color{
   color:#9352ae;
   opacity: 1;
+}
+.bot{
+    position:relative;
+    font-size: 15px;
+  font-weight: bold;
+    color:#ffffff;
+    top:32em;
+   text-align: right;
+   right:2em;
 }
