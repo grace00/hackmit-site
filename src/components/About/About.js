@@ -19,7 +19,8 @@ class About extends Component {
     }
     render() {
         return (<div>
-            {/* <h1 className='heading-background'>BEEYOND</h1> */}
+            {
+             <h1 className='heading-background'>BEEYOND</h1> }
             <div className='splash-section'>
                 <Container className="splash-content-container">
                     <Grid>
@@ -80,9 +81,9 @@ class About extends Component {
                 ))}
             </div>
         </div>
-        
+
             <div className='about'>
-                <div>
+                <div className='about-content'>
                     <h1><Fade bottom cascade>About.</Fade></h1>
                     <Fade bottom>
                         <p>{data.abouttext}</p>
