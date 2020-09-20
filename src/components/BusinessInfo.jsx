@@ -123,7 +123,7 @@ export default class BusinessInfo extends React.Component {
   renderAboutInfo() {
     let { business } = this.state;
     return <div>
-        <h1>About</h1>
+        <h2>About</h2>
         <p>{business.description}</p>
     </div>
   }
@@ -145,9 +145,9 @@ export default class BusinessInfo extends React.Component {
   renderProducts() {
     let { business } = this.state;
     return <div>
-      <h1>
+      <h2>
         <Fade bottom cascade>Products / Services</Fade>
-      </h1>
+      </h2>
       <br/>
       <Grid columns={3} >
         {business.products && business.products.map((product)=>(
@@ -160,22 +160,20 @@ export default class BusinessInfo extends React.Component {
 
   renderReview(review){
     let time = new Date(review.time);
-    return <Segment>
+    return <Segment basic>
       <Fade bottom>
         <div style={{alignSelf: "center"}}>
-          <i class="big user outline icon"></i>
+          {/* <i class="big user outline icon"></i> */}
           {/* <img src="https://react.semantic-ui.com/images/wireframe/square-image.png" class="ui small rounded image"/> */}
         </div>
-        <List.Content>
-          <List.Header as='a'>{review.firstName + review.lastName}</List.Header>
-          <List.Description>
-            {review.review}
-          </List.Description>
-          <List.Description>
-            {/* <Ratings rating={review.Ratings}/> */}
-            {time.toDateString()}
-          </List.Description>
-        </List.Content>
+        <div style={{flexDirection: 'row', display: 'flex', justifyContent: 'flex-start'}}>
+          <p style={{fontSize:18, marginBottom: 5, fontWeight: 'bold'}}>{review.firstName + review.lastName}</p>
+          {review.rating 
+            && <Rating icon='star' maxRating={5} defaultRating={review.rating} size='tiny' disabled style={{paddingTop: 7, paddingLeft: 10}}/>}
+          {/* {review.image && <img src={review.image} alt={review.review} class="ui rounded image"></img>} */}
+        </div>
+        <p style={{marginBottom: 5}}>{review.review}</p>
+        <p style={{color: 'DARKGREY'}}>{time.toDateString()}</p>
       </Fade>
     </Segment>
     
@@ -186,7 +184,7 @@ export default class BusinessInfo extends React.Component {
     return <Container>
       <Grid>
         <Grid.Column width={6}>
-          <h1><Fade bottom cascade>Reviews</Fade></h1>
+          <h2><Fade bottom cascade>Reviews</Fade></h2>
           {business.reviews && business.reviews.map((review)=>(
                 this.renderReview(review)
             ))}
@@ -348,7 +346,7 @@ export default class BusinessInfo extends React.Component {
         {this.renderProducts()}
         <hr style={horizontalBarStyle}/>
         {this.renderReviews()}
-        <br/>
+        <hr style={horizontalBarStyle}/>
         {this.renderReviewForm()}
       </Container>
     )
