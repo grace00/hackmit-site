@@ -91,6 +91,7 @@ export default class Listings extends React.Component {
                 as={ Link } to={"/businesses/" + item.doc._id}
                 color={this.colorSwitch(item.doc.type)}
                 group="true">
+                <Image src={item.doc.image.file}></Image>
                 <Card.Content
                   header={item.doc.businessName}
                   meta={item.doc.type}
