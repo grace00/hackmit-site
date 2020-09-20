@@ -132,7 +132,7 @@ export default class Listings extends React.Component {
                 <Card.Content
                   header={item.doc.businessName}
                   meta={item.doc.type}
-                  description={item.doc.description.substring(0,100) + "..."}>
+                  description={item.doc.description.substring(0,100)}>
                 </Card.Content>
                 <Card.Content extra>
                   <a>
