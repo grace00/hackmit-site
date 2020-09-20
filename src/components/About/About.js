@@ -7,6 +7,7 @@ import SearchDropdown from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 import { Header, Dropdown, Grid, Container, Button, Icon } from 'semantic-ui-react';
 import Splash from './splash.png';
+import Bee from './bee.png';
 
 class About extends Component {
     state = {}
@@ -89,13 +90,13 @@ class About extends Component {
 
             <div className='about'>
                 <div className='about-content'>
-                    <h1><Fade bottom cascade>About.</Fade></h1>
+                    <h1><Fade bottom cascade>About</Fade></h1>
                     <Fade bottom>
                         <p>{data.abouttext}</p>
                         <button><a href={`mailto:${data.contactEmail}`} rel="noopener noreferrer" >Contact</a></button>
                     </Fade>
                 </div>
-                {data.ShowAboutImage ? <img src={data.aboutImage} alt='about iamge'></img> : null}
+                {data.ShowAboutImage ? <img src={Bee} alt='about image' style={{height: "400px"}}></img> : null}
 
 
             </div>
