@@ -4,21 +4,21 @@ import { Header, Grid, Container } from 'semantic-ui-react';
 
 const options = [
   'Arts & Crafts',
-  'Babysitter',
+  'Babysitters',
   'Beauty',
-  'Cleaner',
-  'Carpenter',
-  'Dog walker',
-  'Exterminator',
+  'Cleaners',
+  'Carpenters',
+  'Dog walkers',
+  'Exterminators',
   'Grocery',
   'Lawn care',
   'Photography',
-  'Piano lessons',
-  'Singing lessons',
-  'Sports & Outdoor',
+  'Piano Lessons',
+  'Singing Lessons',
+  'Sports & Outdoors',
   'Technology',
   'Video production',
-  'Yard work',
+  'Yard Work',
   'Other'
 ]
 

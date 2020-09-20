@@ -2,23 +2,23 @@ import React from 'react'
 import { Dropdown } from 'semantic-ui-react'
 
 const options = [
-  { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'artsandcrafts' },
-  { key: 'babysitters', text: 'Babysitters', value: 'babysitters' },
-  { key: 'beauty', text: 'Beauty', value: 'beauty' },
-  { key: 'cleaners', text: 'Cleaners', value: 'cleaners' },
-  { key: 'carpenters', text: 'Carpenters', value: 'carpenters' },
-  { key: 'dogwalker', text: 'Dog Walkers', value: 'dogwalkers' },
-  { key: 'exterminators', text: 'Exterminators', value: 'exterminators' },
-  { key: 'grocery', text: 'Grocery', value: 'grocery' },
-  { key: 'lawn care', text: 'Lawn Care', value: 'lawn care' },
-  { key: 'photography', text: 'Photography', value: 'photography' },
-  { key: 'piano', text: 'Piano Lessons', value: 'piano' },
-  { key: 'singing', text: 'Singing Lessons', value: 'singing' },
-  { key: 'outdoor', text: 'Sports and Outdoor', value: 'outdoor' },
-  { key: 'tech', text: 'Technology', value: 'tech' },
-  { key: 'video', text: 'Video Production', value: 'video' },
-  { key: 'yard', text: 'Yard Work', value: 'yard' },
-  { key: 'other', text: 'Other', value: 'other' }
+  { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'Arts & Crafts' },
+  { key: 'babysitters', text: 'Babysitters', value: 'Babysitters' },
+  { key: 'beauty', text: 'Beauty', value: 'Beauty' },
+  { key: 'cleaners', text: 'Cleaners', value: 'Cleaners' },
+  { key: 'carpenters', text: 'Carpenters', value: 'Carpenters' },
+  { key: 'dogwalker', text: 'Dog Walkers', value: 'Dogwalkers' },
+  { key: 'exterminators', text: 'Exterminators', value: 'Exterminators' },
+  { key: 'grocery', text: 'Grocery', value: 'Grocery' },
+  { key: 'lawn care', text: 'Lawn Care', value: 'Lawn care' },
+  { key: 'photography', text: 'Photography', value: 'Photography' },
+  { key: 'piano', text: 'Piano Lessons', value: 'Piano Lessons' },
+  { key: 'singing', text: 'Singing Lessons', value: 'Singing Lessons' },
+  { key: 'outdoor', text: 'Sports and Outdoors', value: 'Sports & Outdoors' },
+  { key: 'tech', text: 'Technology', value: 'Technology' },
+  { key: 'video', text: 'Video Production', value: 'Video Production' },
+  { key: 'yard', text: 'Yard Work', value: 'Yard Work' },
+  { key: 'other', text: 'Other', value: 'Other' }
 
 ]
 
@@ -53,8 +53,11 @@ export default class SearchBar extends React.Component {
         <Dropdown placeholder='Search for local businesses and self-employed' fluid multiple selection options={options}
           onChange={this.handleCategoryChange}
           defaultValue={this.props.categories} 
+          search
         />
-        <Dropdown placeholder='Select a City' fluid multiple selection options={cities} />
+        <Dropdown placeholder='Select a City' fluid multiple selection options={cities} 
+          search
+        />
       </div>
     )
   }
