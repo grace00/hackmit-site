@@ -5,6 +5,7 @@ import './SearchBar.css'
 const options = [
   { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'Arts & Crafts' }, // values need to exactly match the dropdown options in forms
   { key: 'babysitters', text: 'Babysitters', value: 'Babysitters' },
+  { key: 'baked', text: 'Baked Goods', value: 'Baked Goods' },
   { key: 'beauty', text: 'Beauty', value: 'Beauty' },
   { key: 'cleaners', text: 'Cleaners', value: 'Cleaners' },
   { key: 'carpenters', text: 'Carpenters', value: 'Carpenters' },
