@@ -284,7 +284,7 @@ export default class BusinessInfo extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         {this.renderMainInfo()}
         <br/>
         {this.renderProducts()}
@@ -292,7 +292,7 @@ export default class BusinessInfo extends React.Component {
         {this.renderReviews()}
         <br/>
         {this.renderReviewForm()}
-      </div>
+      </Container>
     )
   }
 }

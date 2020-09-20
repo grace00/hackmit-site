@@ -4,11 +4,11 @@ export default
         //Change The Website Template
         name :'',
         headerTagline: [//Line 1 For Header
-                        'Beeyond. You cannot buy happiness',
+                        'You can\'t buy happiness,',
                         //Line 2 For Header
-                        'But you can buy local.',
+                        'but you can buy local.',
                         //Line 3 For Header
-                        '- Anonymous'
+                        // '- Anonymous'
     ],
         //Contact Email
         contactEmail:'beeyond@gmail.com',

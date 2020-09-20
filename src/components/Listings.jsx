@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {Card, Image, Icon} from 'semantic-ui-react'
+import {Card, Image, Icon, Container} from 'semantic-ui-react'
 import SearchBar from '../components/SearchBar/SearchBar';
 import axios from 'axios';
 
@@ -80,7 +80,7 @@ export default class Listings extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
 
           <SearchBar />
           <h1>Listings</h1>
@@ -106,7 +106,7 @@ export default class Listings extends React.Component {
           ))
           }
           </Card.Group>
-      </div>
+      </Container>
     )
   }
 }
