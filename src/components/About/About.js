@@ -94,10 +94,10 @@ class About extends Component {
 
             <div className='about'>
                 <div className='about-content'>
-                    <h1><Fade bottom cascade>About</Fade></h1>
+                <Header as="h1" style={{marginBottom: 36}}><Fade bottom cascade>About</Fade></Header>
                     <Fade bottom>
                         <p>{data.abouttext}</p>
-                        <button><a href={`mailto:${data.contactEmail}`} rel="noopener noreferrer" >Contact</a></button>
+                        <a href={`mailto:${data.contactEmail}`} rel="noopener noreferrer" ><Button secondary large style={{color: "white", marginTop: 16}}>Contact</Button></a>
                     </Fade>
                 </div>
                 {data.ShowAboutImage ? <img src={Bee} alt='about image' style={{height: "400px"}}></img> : null}

@@ -119,18 +119,20 @@ export default class Listings extends React.Component {
       <Container>
         <SearchBar updateCategories={this.updateCategories} updateLocations={this.updateLocations} locations={this.props.locations} categories={this.props.categories} />
         <h1>Listings</h1>
-        <Card.Group>
+        <Card.Group style={{width: "100%"}}>
           {
             this.state.filteredData.map((item, index) => (
               <Card
                 as={Link} to={"/businesses/" + item.doc._id}
                 color={this.colorSwitch(item.doc.type)}
-                group="true">
+                group="true"
+                style={{width: "32%"}}
+                >
                 <Image src={item.doc.image.file}></Image>
                 <Card.Content
                   header={item.doc.businessName}
                   meta={item.doc.type}
-                  description={item.doc.description}>
+                  description={item.doc.description.substring(0,100)}>
                 </Card.Content>
                 <Card.Content extra>
                   <a>

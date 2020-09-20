@@ -5,6 +5,7 @@ import { Header, Grid, Container } from 'semantic-ui-react';
 const options = [
   'Arts & Crafts',
   'Babysitters',
+  'Baked Goods',
   'Beauty',
   'Cleaners',
   'Carpenters',

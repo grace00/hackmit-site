@@ -106,7 +106,7 @@ export default class BusinessInfo extends React.Component {
     let { business } = this.state;
     return <div>
             <div style={{display: 'flex', flexDirection: "row", justifyContent: "flex-start"  }}>
-              {business.image && <img src={business.image.file} alt={business.businessName} class="ui rounded image"></img>}
+              {business.image && <img src={business.image.file} alt={business.businessName} class="ui medium rounded image"></img>}
               <div style={{display: 'flex', flexDirection: 'column', paddingLeft: 60}}>
                 <p style={{fontSize: 40, fontWeight: 'bold'}}>
                   {business.businessName}
@@ -124,21 +124,27 @@ export default class BusinessInfo extends React.Component {
     let { business } = this.state;
     return <div>
         <h2>About</h2>
+        <Grid>
+        <Grid.Column width={11}>
         <p>{business.description}</p>
+        </Grid.Column>
+        </Grid>
     </div>
   }
 
   renderProduct(product) {
     return <Grid.Column>
+      <Container>
       <Fade bottom>
           <div>
           {/* {product.itemImage && <img src={product.itemImage} alt={product.itemName} style={{width:250, height:300}}></img>} */}
-          {product.itemImage && <img src={product.itemImage} alt={product.itemName} class="ui rounded image"></img>}
+          {product.itemImage && <img src={product.itemImage} alt={product.itemName} class="ui rounded image " ></img>}
           <h3>{product.itemName}</h3>
           <p>{product.itemDescription}</p>
           <p>{product.itemCost}</p>
           </div>
     </Fade>
+    </Container>
   </Grid.Column>
   }
 
