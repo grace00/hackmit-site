@@ -3,7 +3,7 @@ import { Dropdown } from 'semantic-ui-react'
 
 const options = [
   { key: 'artsandcrafts', text: 'Arts and Crafts', value: 'artsandcrafts' },
-  { key: 'babysitters', text: 'Babysitters', value: 'Babysitters' },
+  { key: 'babysitters', text: 'Babysitters', value: 'babysitters' },
   { key: 'beauty', text: 'Beauty', value: 'beauty' },
   { key: 'cleaners', text: 'Cleaners', value: 'cleaners' },
   { key: 'carpenters', text: 'Carpenters', value: 'carpenters' },
@@ -25,16 +25,37 @@ const options = [
 const cities = [
   { key: 'sac', text: 'Sacramento, CA', value: 'sac' },
   { key: 'sanjose', text: 'San Jose, CA', value: 'sanjose' },
-  { key: 'cambridge', text: 'Cambridge, MA', value: 'cambridge'},
+  { key: 'cambridge', text: 'Cambridge, MA', value: 'cambridge' },
   { key: 'stanford', text: 'Stanford, CA', value: 'stanford' }
-
 ]
 
-const DropdownExampleMultipleSelection = () => (
-<div>
-  <Dropdown placeholder='Search for local businesses and self-employed' fluid multiple selection options={options} />
-  <Dropdown placeholder='Select a City' fluid multiple selection options={cities} />
-  </div>
-)
+export default class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-export default DropdownExampleMultipleSelection
+    };
+  }
+  componentDidMount(){
+    console.log("default", this.props.categories)
+  }
+
+  handleCategoryChange = (event, {value}) => {
+    console.log("categories in searchbar", value);
+    // let categoryName = event.target.textContent;
+    // console.log("categoryName",categoryName);
+    this.props.updateCategories(value);
+  }
+
+  render() {
+    return (
+      <div>
+        <Dropdown placeholder='Search for local businesses and self-employed' fluid multiple selection options={options}
+          onChange={this.handleCategoryChange}
+          defaultValue={this.props.categories} 
+        />
+        <Dropdown placeholder='Select a City' fluid multiple selection options={cities} />
+      </div>
+    )
+  }
+}

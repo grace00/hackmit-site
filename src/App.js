@@ -11,16 +11,29 @@ import BusinessInfo from './components/BusinessInfo';
 import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [],
+    };
+  }
+
+  updateCategories = (categories) => {
+    console.log("updating categories here", categories)
+    this.setState({
+      categories
+    });
+  }
+
   render() {
     return (
         <HashRouter>
           <NavBar />
           {/* <Container> */}
           <Switch>
-            <Route exact path='/' component={About} />
-            <Route exact path='/businesses' component={Listings} />
+            <Route exact path='/' render={props => <About {...props} updateCategories={this.updateCategories} categories={this.state.categories}/>}  />
+            <Route exact path='/businesses' render={props => <Listings {...props} updateCategories={this.updateCategories} categories={this.state.categories}/>} />
             <Route exact path='/post' component={Post} />
-            {/*<Route exact path='/businesses/1' component={BusinessInfo} /> need to make dynammic later */}
             <Route path='/businesses/:id' render={(props) => <BusinessInfo {...props} />} /> 
           </Switch>
           {/* </Container> */}

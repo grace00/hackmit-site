@@ -39,6 +39,10 @@ export default class Listings extends React.Component {
     })
   }
 
+  updateCategories = (categories) => {
+    this.props.updateCategories(categories);
+  
+  }
   colorSwitch = (type) => {
     switch(type) {
       case('Arts & Crafts'):
@@ -81,8 +85,7 @@ export default class Listings extends React.Component {
   render() {
     return (
       <Container>
-
-          <SearchBar />
+          <SearchBar updateCategories={this.updateCategories} categories={this.props.categories} />
           <h1>Listings</h1>
           <Card.Group>
           {

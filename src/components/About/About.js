@@ -9,6 +9,10 @@ import { Header, Grid, Container } from 'semantic-ui-react';
 
 class About extends Component {
     state = {}
+
+    updateCategories = (categories) => {
+        this.props.updateCategories(categories);
+    }
     render() {
         return (<div>
             {/* <h1 className='heading-background'>BEEYOND</h1> */}
@@ -25,14 +29,15 @@ class About extends Component {
                                     Find small businesses and local professionals who can help you with anything.
                         </p>
                             </Fade>
-                            <SearchDropdown />
-
+                            <SearchDropdown updateCategories={this.updateCategories} categories={this.props.categories}/>
+                            <Link to={'/businesses'}>
                             <div className="ui animated button" tabIndex="0">
                                 <div className="visible content">Search</div>
                                 <div className="hidden content">
                                     <i className="right arrow icon"></i>
                                 </div>
                             </div>
+                            </Link>
                             <div className="ui vertical animated button" tabIndex="0">
                                 <div className="hidden content">Donate</div>
                                 <div className="visible content">
